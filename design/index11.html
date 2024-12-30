@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homepage</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'DM Sans', Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 0px;
+        }
+        header {
+            border-bottom: 0.75px solid #fff;
+            background-color: #000;
+            color: #fff;
+            padding: 1.3rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .logo-ex {
+            font-size: 2.7rem;
+            margin-right: 0.5rem;
+            line-height: 1;
+        }
+        .logo-text {
+            font-size: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.1;
+        }
+
+        .logo:hover .dropdown-content {
+            display: block;
+        }
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.7rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+        }
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            margin: 6px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 30px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .hero {
+            padding: 230px 2.5% 150px ;
+            background-color: #f2f2f2;
+            border-bottom: 0.75px solid #000;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+        .hero p {
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+        .about {
+            padding: 80px 2.5% ;
+            text-align: left;
+        }
+        .about .container {
+            max-width: 800px;
+        }
+        .about h2 {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            font-weight: 900;
+        }
+        .about p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+        .about .btn {
+            text-align: center; 
+            margin-top: 0.8rem;
+            font-size: 1.2rem;
+            padding: 15px ;
+            width: 45%;
+        }
+        .btn {
+            text-align: center; 
+            display: inline-block;
+            background-color: #000;
+            color: #fff;
+            padding: 15px ;
+            text-decoration: none;
+            margin-top: 1rem;
+            width: 35%;
+        }
+        .portfolio {
+            background-color: #000;
+            padding: 5% 2.5%;
+            z-index: 1;
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2.5%;
+        }
+        .portfolio h2 {
+            padding: 0px 0  ;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            font-weight: 900;
+            text-align: left;
+            color: #fff;
+        }
+        .portfolio-item {
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .portfolio-image {
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .portfolio-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            
+        }
+        .portfolio-caption {
+            font-size: 0.7rem;
+            margin-top: 10px;
+            text-align: left;
+            color: #fff;
+        }
+        .portfolio-link {
+            text-decoration: none;
+            color: inherit; /* 繼承父級顏色 */
+            transition: color 0.3s ease, filter 0.3s ease; /* 添加過渡動畫 */
+        }
+
+        .portfolio-link:hover {
+            color: #595959 /* 滑鼠懸停時顏色變灰 */
+        }
+
+        .portfolio-link:active {
+            filter: blur(3px); /* 點擊時增加模糊效果 */
+        }
+
+        .see-more {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .see-more .btn {
+            text-align: center; 
+            background-color: #fff;
+            color: #000;
+            border: 0.75px solid #000;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+        footer {
+            color: #fff;
+            background-color: #000;
+            text-align: center;
+            padding: 70px 0;
+            border-top: 0.75px solid #fff;
+            z-index: 2;
+        }
+        /* 只電腦 */
+        @media (min-width: 768px) {
+            .container {
+                width: 80%;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 0px;
+            }
+            header {
+                border-bottom: 0.75px solid #fff;
+                background-color: #000;
+                color: #fff;
+                padding: 2rem 0;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+                font-size: 1.5rem; /* 上排按鈕 */
+            }
+            .header-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .logo-ex {
+                font-size: 3.2rem;
+                margin-right: 0.5rem;
+                line-height: 1;
+            }
+            .logo-text {
+                font-size: 1.3rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                line-height: 1.1;
+            }
+            .hero {
+                padding: 280px 0 200px;
+                background-color: #f2f2f2;
+                border-bottom: 0.75px solid #000;
+            }
+            .hero h1 {
+                font-size: 4.5rem;
+                line-height: 1.1;
+            }
+            .hero p {
+                margin-bottom: 2rem;
+                font-size: 1.1rem;
+            }
+            .about .btn {
+                text-align: center; 
+                margin-top: 2.5rem;
+                font-size: 1.2rem;
+                padding: 15px ;
+                width: 25%;
+            }
+            .btn {
+                text-align: center; 
+                display: inline-block;
+                background-color: #000;
+                color: #fff;
+                padding: 15px ;
+                text-decoration: none;
+                margin-top: 1rem;
+                width: 25%;
+            }
+            .portfolio-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .portfolio-caption {
+                font-size: 1.1rem;
+                margin-top: 15px;
+                text-align: left;
+                color: #fff;
+            }
+        }
+        /* 只手機 */
+        @media (max-width: 767px) {
+            .nav-toggle {
+                display: block;
+            }
+            nav {
+                display: none;
+            }
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #000;
+                padding-left: 7%;
+                padding-bottom: 5%;
+            }
+            nav.active ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav.active ul li {
+                margin: 10px 0;
+            }
+            nav.active ul li a {
+                font-size: 1.2rem;
+            }
+            .see-more {
+                text-align: left;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+                line-height: 1.2;
+            }
+            .about h2 {
+                font-size: 2.4rem;
+            }
+            .about p {
+                font-size: 1rem;
+            }
+            .portfolio {
+                background-color: #000;
+                padding: 5% 2.5%;
+                z-index: 1;
+            }
+            .portfolio h2 {
+                padding: 0px 0% ;
+                font-size: 2.4rem;
+                margin-bottom: 2rem;
+                font-weight: 900;
+                text-align: left;
+                color: #fff;
+            }
+        }
+        .hero p.chinese-text {
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <span class="logo-ex">EX</span>
+                <div class="logo-text">
+                    <span>DESIGN</span>
+                    <span>STUDIO</span>
+                </div>
+               
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="index0moreinfo.html">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Customer-focused.<br>Professionally executed.</h1>
+                <p class="chinese-text">客戶至上，專業至臻</p>
+                <p class="chinese-text">以專業回應信任，為您的品牌實現價值。</p>
+            </div>
+        </section>
+
+        <section class="about">
+            <div class="container">
+                <h2>About Me</h2>
+                <p>Hello, I am a second-year university student full of passion for design.</p>
+                <a href="index0moreinfo.html" class="btn">more info</a>
+            </div>
+        </section>
+
+        <section class="portfolio">
+            <section class="container">
+                    <h2>WORK</h2>
+            </section>
+            <div class="container">
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <a href="index8.html" class="portfolio-link">
+                        <div class="portfolio-image">
+                            <img src="未命名-1-13.jpg" alt="Work 2">    
+                        </div>
+                        <p class="portfolio-caption">Social media advertisement-1</p>
+                        </a>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <a href="index12345.html" class="portfolio-link">
+                        <div class="portfolio-image">
+                            <img src="untitled.png" alt="Work 2">
+                        </div>
+                        <p class="portfolio-caption">Social media advertisement-2</p>
+                        </a>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <a href="index9.html" class="portfolio-link">
+                        <div class="portfolio-image">
+                            <img src="作品集_工作區域 1 複本 4.jpg" alt="Work 2"> 
+                        </div>
+                        <p class="portfolio-caption">日月老茶廠｜識別設計</p>
+                        </a>
+                    </div>
+                    <div class="portfolio-item">
+                        <a href="index0illustration.html" class="portfolio-link">
+                        <div class="portfolio-image">
+                            <img src="more縮圖.jpg" alt="Work 2"> 
+                        </div>
+                        <p class="portfolio-caption">插畫 | illustration</p>
+                        </a>
+                    </div>
+                    <div class="portfolio-item">
+                        <a href="index0ad.html" class="portfolio-link">
+                        <div class="portfolio-image">
+                                <img src="more縮圖.jpg" alt="Work 2">
+                        </div>
+                        <p class="portfolio-caption">圖文廣告｜AD&EDM</p>
+                        </a>
+                    </div>
+                    <div class="portfolio-item">
+                        <a href="https://www.instagram.com/3oodpi/" class="portfolio-link">
+                        <div class="portfolio-image">
+                             <img src="eq7nz-0vh8j.gif" alt="Work 2">
+                        </div>
+                        <p class="portfolio-caption">Sketch</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="see-more">
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Enxuan Zhang. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+

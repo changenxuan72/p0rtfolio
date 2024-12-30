@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>more info</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,900&display=swap" rel="stylesheet">
+    <style>
+        /* 手機 */
+        body {
+            background: #000;
+            font-family: 'DM Sans', Arial, sans-serif;;
+            line-height: 1.5;
+            margin: 0 auto;
+            padding: 0.5rem;
+            color: #fff;
+            max-width: 1400px;
+        }
+
+        .section {
+            margin-bottom: 6rem;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .section-label {
+            font-size: 3.5rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .section-content {
+            max-width: 100%;
+        }
+
+        .section-heading {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 0 0 1.5rem 0;
+        }
+        /* 內文 */
+        .section-text {
+                font-size: 0.6rem;
+                color: #b2b2b2;
+                line-height: 1.75;
+        }
+        /* 內文小標 */
+        .section-text2 {
+                font-size: 1rem;
+                font-weight: 700;
+                color: #e5e5e5;
+        }
+        /* 只手機 */
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem;
+            }
+
+            .section {
+                grid-template-columns: 20% 1fr;
+                gap: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .section-heading {
+                font-size: 2.2rem;
+                margin-top: -3%;
+            }
+            .section-label {
+                font-size: 1.5rem;
+                color: #fff;
+                font-weight: 700;
+            }
+             /* 內文 */
+            .section-text {
+                font-size: 0.7rem;
+            }
+             /* 內文小標 */
+            .section-text2 {
+                font-size: 0.9rem;
+                font-weight: 700;
+                color: #e5e5e5;
+        }
+        }
+        /* 只會改電腦版 */
+        @media (min-width: 769px) {
+            body {
+                padding: 4rem 6rem;
+            }
+            .section {
+                margin-bottom: 6rem;
+                display: grid;
+                grid-template-columns: 1fr 3fr;
+                gap: 4rem;
+                align-items: start;
+                padding-left: 12rem; /* 增加左邊的內邊距 */
+                padding-right: 15rem; /* 增加右邊的內邊距 */
+            }
+
+            .section-heading {
+                font-size: 3.5rem;
+                margin-top: -2%;
+            }
+
+            .section-text {
+                font-size: 1rem;
+            }
+
+            .section-label {
+                font-size: 2.5rem;
+            }
+             /* 內文 */
+            .section-text {
+                font-size: 1rem;
+                color: #b2b2b2;
+                line-height: 2;
+            }
+            .section-text2 {
+                font-size: 1.25rem;
+                font-weight: 700;
+                color: #e5e5e5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <article class="section">
+            <div class="section-label">(a)</div>
+            <div class="section-content">
+                <h2 class="section-heading">Enxuan Chang</h2>
+                <p class="section-text2">/ 學歷</p>
+                    <p class="section-text">
+                    - 士林高商 廣告設計科</br>
+                    ‍- 台北商業大學 創意科技與產品設計系 大二在學</br>
+                    </br></br>
+                    </p>
+                <p class="section-text2">/ 證照</p>
+                <p class="section-text">
+                    - 視覺傳達設計 丙級</br>
+                    ‍- 印前製程-圖文組版 丙級</br>
+                    </p>
+            </div>
+        </article>
+
+        <article class="section">
+            <div class="section-label">(b)</div>
+            <div class="section-content">
+                <h2 class="section-heading">About</h2>
+                <p class="section-text">
+                    身為一名大二學生，雖然經驗有限，但對設計的熱情與投入毫不妥協。我相信，設計的本質在於服務，核心是理解需求、解決問題，並為每一位合作夥伴創造實質價值。
+                    </br>
+                    我專注於平面設計，致力為您提升品牌的曝光度與市場競爭力。我不斷學習與精進，目標是讓每一份設計都能成為助力您的品牌前進的推手。
+                    </br>
+                    期待能有機會與您合作，我將全心傾聽您的需求，一同將設計的價值發揮到極致，讓您的品牌散發無限可能，迎接更多的可能與成功。
+                </p>
+            </div>
+        </article>
+    </main>
+</body>
+</html>
+
