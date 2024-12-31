@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>homepage</title>
+    <title>Homepage</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -56,10 +56,6 @@
             justify-content: center;
             line-height: 1.1;
         }
-
-        .logo:hover .dropdown-content {
-            display: block;
-        }
         .nav-toggle {
             display: none;
             background: none;
@@ -90,7 +86,7 @@
             text-decoration: none;
         }
         .hero {
-            padding: 230px 2.5% 150px ;
+            padding: 230px 2.5% 150px;
             background-color: #f2f2f2;
             border-bottom: 0.75px solid #000;
         }
@@ -105,7 +101,7 @@
             font-size: 0.9rem;
         }
         .about {
-            padding: 80px 2.5% ;
+            padding: 80px 2.5%;
             text-align: left;
         }
         .about .container {
@@ -125,7 +121,7 @@
             text-align: center; 
             margin-top: 0.8rem;
             font-size: 1.2rem;
-            padding: 15px ;
+            padding: 15px;
             width: 45%;
         }
         .btn {
@@ -133,7 +129,7 @@
             display: inline-block;
             background-color: #000;
             color: #fff;
-            padding: 15px ;
+            padding: 15px;
             text-decoration: none;
             margin-top: 1rem;
             width: 35%;
@@ -149,7 +145,7 @@
             gap: 2.5%;
         }
         .portfolio h2 {
-            padding: 0px 0  ;
+            padding: 0px 0;
             font-size: 2.8rem;
             margin-bottom: 2rem;
             font-weight: 900;
@@ -166,20 +162,10 @@
             aspect-ratio: 1 / 1;
             overflow: hidden;
         }
-
         .portfolio-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-        .portfolio-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            
         }
         .portfolio-caption {
             font-size: 0.7rem;
@@ -189,18 +175,15 @@
         }
         .portfolio-link {
             text-decoration: none;
-            color: inherit; /* 繼承父級顏色 */
-            transition: color 0.3s ease, filter 0.3s ease; /* 添加過渡動畫 */
+            color: inherit;
+            transition: color 0.3s ease, filter 0.3s ease;
         }
-
         .portfolio-link:hover {
-            color: #595959 /* 滑鼠懸停時顏色變灰 */
+            color: #595959;
         }
-
         .portfolio-link:active {
-            filter: blur(3px); /* 點擊時增加模糊效果 */
+            filter: blur(3px);
         }
-
         .see-more {
             text-align: center;
             margin-top: 2rem;
@@ -212,6 +195,19 @@
             border: 0.75px solid #000;
             margin-top: 3rem;
             margin-bottom: 3rem;
+            cursor: pointer;
+        }
+        .toggle-more {
+            display: none;
+        }
+        .hidden {
+            display: none;
+        }
+        .toggle-more:checked ~ .portfolio-grid .hidden {
+            display: block;
+        }
+        .toggle-more:checked ~ .see-more .btn {
+            display: none;
         }
         footer {
             color: #fff;
@@ -221,7 +217,6 @@
             border-top: 0.75px solid #fff;
             z-index: 2;
         }
-        /* 只電腦 */
         @media (min-width: 768px) {
             .container {
                 width: 80%;
@@ -230,61 +225,30 @@
                 padding: 0 0px;
             }
             header {
-                border-bottom: 0.75px solid #fff;
-                background-color: #000;
-                color: #fff;
                 padding: 2rem 0;
-                position: fixed;
-                width: 100%;
-                top: 0;
-                z-index: 1000;
-                font-size: 1.5rem; /* 上排按鈕 */
-            }
-            .header-content {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+                font-size: 1.5rem;
             }
             .logo-ex {
                 font-size: 3.2rem;
-                margin-right: 0.5rem;
-                line-height: 1;
             }
             .logo-text {
                 font-size: 1.3rem;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                line-height: 1.1;
             }
             .hero {
                 padding: 280px 0 200px;
-                background-color: #f2f2f2;
-                border-bottom: 0.75px solid #000;
             }
             .hero h1 {
                 font-size: 4.5rem;
                 line-height: 1.1;
             }
             .hero p {
-                margin-bottom: 2rem;
                 font-size: 1.1rem;
             }
             .about .btn {
-                text-align: center; 
                 margin-top: 2.5rem;
-                font-size: 1.2rem;
-                padding: 15px ;
                 width: 25%;
             }
             .btn {
-                text-align: center; 
-                display: inline-block;
-                background-color: #000;
-                color: #fff;
-                padding: 15px ;
-                text-decoration: none;
-                margin-top: 1rem;
                 width: 25%;
             }
             .portfolio-grid {
@@ -293,11 +257,8 @@
             .portfolio-caption {
                 font-size: 1.1rem;
                 margin-top: 15px;
-                text-align: left;
-                color: #fff;
             }
         }
-        /* 只手機 */
         @media (max-width: 767px) {
             .nav-toggle {
                 display: block;
@@ -329,8 +290,11 @@
                 text-align: left;
             }
             .hero h1 {
-                font-size: 2.8rem;
+                font-size: 2.3rem;
                 line-height: 1.2;
+            }
+            .hero p {
+                font-size: 0.8rem;
             }
             .about h2 {
                 font-size: 2.4rem;
@@ -338,18 +302,9 @@
             .about p {
                 font-size: 1rem;
             }
-            .portfolio {
-                background-color: #000;
-                padding: 5% 2.5%;
-                z-index: 1;
-            }
             .portfolio h2 {
-                padding: 0px 0% ;
+                padding: 5% 1% 0%;
                 font-size: 2.4rem;
-                margin-bottom: 2rem;
-                font-weight: 900;
-                text-align: left;
-                color: #fff;
             }
         }
         .hero p.chinese-text {
@@ -367,7 +322,6 @@
                     <span>DESIGN</span>
                     <span>STUDIO</span>
                 </div>
-               
             </div>
             <nav>
                 <ul>
@@ -401,71 +355,85 @@
             </div>
         </section>
 
-        <section class="portfolio">
-            <section class="container">
-                    <h2>WORK</h2>
-            </section>
+        <section id="work" class="portfolio">
             <div class="container">
+                <h2>WORK</h2>
+                <input type="checkbox" id="toggle-more" class="toggle-more">
                 <div class="portfolio-grid">
                     <div class="portfolio-item">
                         <a href="index8.html" class="portfolio-link">
-                        <div class="portfolio-image">
-                            <img src="未命名-1-13.jpg" alt="Work 2">    
-                        </div>
-                        <p class="portfolio-caption">Social media advertisement-1</p>
+                            <div class="portfolio-image">
+                                <img src="未命名-1-13.jpg" alt="Social media advertisement-1">    
+                            </div>
+                            <p class="portfolio-caption">Social media advertisement-1</p>
                         </a>
                     </div>
-
                     <div class="portfolio-item">
                         <a href="index12345.html" class="portfolio-link">
-                        <div class="portfolio-image">
-                            <img src="untitled.png" alt="Work 2">
-                        </div>
-                        <p class="portfolio-caption">Social media advertisement-2</p>
+                            <div class="portfolio-image">
+                                <img src="untitled.png" alt="Social media advertisement-2">
+                            </div>
+                            <p class="portfolio-caption">Social media advertisement-2</p>
                         </a>
                     </div>
-
                     <div class="portfolio-item">
                         <a href="index9.html" class="portfolio-link">
-                        <div class="portfolio-image">
-                            <img src="作品集_工作區域 1 複本 4.jpg" alt="Work 2"> 
-                        </div>
-                        <p class="portfolio-caption">日月老茶廠｜識別設計</p>
+                            <div class="portfolio-image">
+                                <img src="作品集_工作區域 1 複本 4.jpg" alt="日月老茶廠｜識別設計"> 
+                            </div>
+                            <p class="portfolio-caption">日月老茶廠｜識別設計</p>
                         </a>
                     </div>
                     <div class="portfolio-item">
                         <a href="index0illustration.html" class="portfolio-link">
-                        <div class="portfolio-image">
-                            <img src="more縮圖.jpg" alt="Work 2"> 
-                        </div>
-                        <p class="portfolio-caption">插畫 | illustration</p>
+                            <div class="portfolio-image">
+                                <img src="more縮圖.jpg" alt="插畫 | illustration"> 
+                            </div>
+                            <p class="portfolio-caption">插畫 | illustration</p>
                         </a>
                     </div>
                     <div class="portfolio-item">
                         <a href="index0ad.html" class="portfolio-link">
-                        <div class="portfolio-image">
-                                <img src="more縮圖.jpg" alt="Work 2">
-                        </div>
-                        <p class="portfolio-caption">圖文廣告｜AD&EDM</p>
+                            <div class="portfolio-image">
+                                <img src="more縮圖.jpg" alt="圖文廣告｜AD&EDM">
+                            </div>
+                            <p class="portfolio-caption">圖文廣告｜AD&EDM</p>
                         </a>
                     </div>
                     <div class="portfolio-item">
                         <a href="https://www.instagram.com/3oodpi/" class="portfolio-link">
-                        <div class="portfolio-image">
-                             <img src="eq7nz-0vh8j.gif" alt="Work 2">
-                        </div>
-                        <p class="portfolio-caption">Sketch</p>
+                            <div class="portfolio-image">
+                                <img src="eq7nz-0vh8j.gif" alt="Sketch">
+                            </div>
+                            <p class="portfolio-caption">Sketch</p>
+                        </a>
+                    </div>
+                    <!-- Hidden items -->
+                    <div class="portfolio-item hidden">
+                        <a href="index9.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="作品集_工作區域 1 複本 4.jpg" alt="日月老茶廠｜識別設計"> 
+                            </div>
+                            <p class="portfolio-caption">日月老茶廠｜識別設計</p>
+                        </a>
+                    </div>
+                    <div class="portfolio-item hidden">
+                        <a href="index0illustration.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="more縮圖.jpg" alt="插畫 | illustration"> 
+                            </div>
+                            <p class="portfolio-caption">插畫 | illustration</p>
                         </a>
                     </div>
                 </div>
                 <div class="see-more">
-                    <a href="#" class="btn">see more</a>
+                    <label for="toggle-more" class="btn">See More</label>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer id="contact">
         <div class="container">
             <p>&copy; 2024 Enxuan Zhang. All rights reserved.</p>
         </div>
@@ -478,4 +446,3 @@
     </script>
 </body>
 </html>
-
