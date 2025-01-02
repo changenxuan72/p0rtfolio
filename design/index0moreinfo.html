@@ -6,7 +6,6 @@
     <title>more info</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,900&display=swap" rel="stylesheet">
     <style>
-        /* 手機 */
         body {
             background: #000;
             font-family: 'DM Sans', Arial, sans-serif;;
@@ -52,6 +51,30 @@
                 font-weight: 700;
                 color: #e5e5e5;
         }
+        .back-btn {
+            text-align: right; /* 按鈕靠右對齊 */
+            margin: 20px;      /* 與周圍留出間距 */ 
+            font-family:'DM Sans';
+        }
+
+        /* 按鈕樣式 */
+        .back-btn a {
+            font-size: 1.3rem;          /* 字體大小 */
+            text-decoration: none;    /* 去除底線 */
+            color: #fff;             /* 字體顏色 */
+            font-weight: 700;         /* 適度加粗 */
+            display: inline-flex;      /* 讓文字與箭頭在同一行 */
+            align-items: center;       /* 文字與箭頭垂直居中 */
+            gap: 8px;   
+            transition: transform 0.3s ease, color 0.3s ease; /* 添加平滑效果 */
+            padding-top: 10%;
+        }
+
+        .back-btn a:hover {
+            transform: translateX(5px); /* 懸停時向右滑動 5px */
+            color: #666;             /* 懸停時文字變色 */
+        }
+
         /* 只手機 */
         @media (max-width: 768px) {
             body {
@@ -122,6 +145,18 @@
                 font-weight: 700;
                 color: #e5e5e5;
             }
+            .back-btn a {
+                font-size: 2rem;          /* 字體大小 */
+                text-decoration: none;    /* 去除底線 */
+                color: #fff;             /* 字體顏色 */
+                font-weight: 700;         /* 適度加粗 */
+                display: inline-flex;      /* 讓文字與箭頭在同一行 */
+                align-items: center;       /* 文字與箭頭垂直居中 */
+                gap: 8px;   
+                transition: transform 0.3s ease, color 0.3s ease; /* 添加平滑效果 */
+                padding-top: 10%;
+            }
+
         }
     </style>
 </head>
@@ -150,13 +185,16 @@
             <div class="section-content">
                 <h2 class="section-heading">About</h2>
                 <p class="section-text">
-                    尊敬的客戶案主您好！我目前是一名就讀產品設計系大二的學生，雖然經驗有限，但對設計的熱情與投入毫不妥協。我相信設計的本質在於服務，核心是理解需求、解決問題，更重要的是為每一位合作夥伴創造更大的經濟價值。
+                    尊敬的客戶＆雇主您好！我目前是一名就讀產品設計系大二的學生，雖然經驗有限，但對設計的熱情與投入毫不妥協。我相信設計的本質在於服務，核心是理解需求、解決問題，更重要的是能夠為您創造更大的經濟價值！
                     </br></br>
-                    我一定竭盡全力完成您委託的每一項設計，致力為您提升品牌的曝光度與市場競爭力。此外我不斷學習與精進，目標是讓每一份設計都能成為助力您品牌前進的推手。
+                    我一定竭盡全力完成您指派的每一項設計，致力為您提升品牌的曝光度與市場競爭力。此外我不斷學習與精進，目標是讓每一份設計都能成為助力您品牌前進的推手。
                     </br></br>
-                    非常期待能有機會與您合作！我將全心傾聽您的需求，一同將設計的價值發揮到極致，讓您的品牌散發無限可能，一同迎接更多的商機與成功。
+                    非常期待能有機會與您合作！我將全心傾聽您的需求，一同將設計的價值發揮到極致，讓您的品牌散發無限可能，一同迎接更多的商機與成功!
 
                 </p>
+                <div class="back-btn">
+                    <a href="index11.html"> Back →</a>
+                </div>
             </div>
         </article>
     </main>
