@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EX Design Studio - Professional design services focusing on customer-centric and professionally executed solutions">
     <title>ex.site</title>
+    
+    <!-- Preload critical font -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="webbb-15.png">
+    <link rel="preload" as="image" href="webbb-16.png">
+
     <style>
         * {
             margin: 0;
@@ -342,12 +351,12 @@
                 content: '';
                 position: absolute;
                 top: 15%;
-                left: 5%;
-                right: -10%;
+                left: 40%;
+                right: 0%;
                 bottom: 0%;
                 background-image: url('webbb-15.png');
                 background-size: cover;
-                background-position: right;
+                background-position: center;
                 background-repeat: no-repeat;
                 opacity: 1;
                 z-index: 0;
@@ -410,20 +419,6 @@
             .portfolio-caption {
                 font-size: 1.1rem;
                 margin-top: 15px;
-            }
-            .hero::before {
-                content: '';
-                position: absolute;
-                top: 15%;
-                left: 40%;
-                right: 0%;
-                bottom: 0%;
-                background-image: url('webbb-15.png');
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                opacity: 1;
-                z-index: 0;
             }
             .contact .btn {
                 width: 25%;
@@ -587,7 +582,7 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
-            <button class="nav-toggle">
+            <button class="nav-toggle" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -622,7 +617,7 @@
                     <div class="portfolio-item">
                         <a href="index8.html" class="portfolio-link">
                             <div class="portfolio-image">
-                                <img src="未命名-1-13.jpg" alt="Social media advertisement-1">    
+                                <img loading="lazy" decoding="async" src="未命名-1-13.jpg" alt="Social media advertisement-1">    
                             </div>
                             <p class="portfolio-caption">Facebook advertisement-1</p>
                         </a>
@@ -630,7 +625,7 @@
                     <div class="portfolio-item">
                         <a href="index12345.html" class="portfolio-link">
                             <div class="portfolio-image">
-                                <img src="webbb-12.jpg" alt="Social media advertisement-2">
+                                <img loading="lazy" decoding="async" src="webbb-12.jpg" alt="Social media advertisement-2">
                             </div>
                             <p class="portfolio-caption">Facebook advertisement-2</p>
                         </a>
@@ -638,7 +633,7 @@
                     <div class="portfolio-item">
                         <a href="index7.html" class="portfolio-link">
                             <div class="portfolio-image">
-                                <img src="未命名-4_工作區域 1 複本 17.jpg" alt="Facebook advertisement"> 
+                                <img loading="lazy" decoding="async" src="未命名-4_工作區域 1 複本 17.jpg" alt="Facebook advertisement"> 
                             </div>
                             <p class="portfolio-caption">Facebook advertisement-3</p>
                         </a>
@@ -646,7 +641,7 @@
                     <div class="portfolio-item">
                         <a href="index6.html" class="portfolio-link">
                             <div class="portfolio-image">
-                                <img src="webbb-07.jpg" alt="Facebook advertisement-4"> 
+                                <img loading="lazy" decoding="async" src="webbb-07.jpg" alt="Facebook advertisement-4"> 
                             </div>
                             <p class="portfolio-caption">Facebook advertisement-4</p>
                         </a>
@@ -654,7 +649,7 @@
                     <div class="portfolio-item">
                         <a href="index9.html" class="portfolio-link">
                             <div class="portfolio-image">
-                                <img src="webbb-13.jpg" alt="日月老茶廠｜識別設計">
+                                <img loading="lazy" decoding="async" src="webbb-13.jpg" alt="日月老茶廠｜識別設計">
                             </div>
                             <p class="portfolio-caption">日月老茶廠｜識別設計</p>
                         </a>
@@ -662,7 +657,7 @@
                     <div class="portfolio-item">
                         <a href="index0ad.html" class="portfolio-link">
                             <div class="portfolio-image">
-                                <img src="more縮圖.jpg" alt="圖文廣告｜AD&EDM">
+                                <img loading="lazy" decoding="async" src="more縮圖.jpg" alt="圖文廣告｜AD&EDM">
                             </div>
                             <p class="portfolio-caption">圖文廣告｜AD&EDM</p>
                         </a>
@@ -671,7 +666,7 @@
                     <div class="portfolio-item hidden">
                         <a href="index0illustration.html" class="portfolio-link">
                             <div class="portfolio-image">
-                                <img src="more縮圖.jpg" alt="插畫 | illustration"> 
+                                <img loading="lazy" decoding="async" src="more縮圖.jpg" alt="插畫 | illustration"> 
                             </div>
                             <p class="portfolio-caption">插畫 | illustration</p>
                         </a>
@@ -679,7 +674,7 @@
                     <div class="portfolio-item hidden">
                         <a href="factory.html" class="portfolio-link">
                             <div class="portfolio-image">
-                                <img src="webbb-11.jpg" alt="2.5D｜Factory"> 
+                                <img loading="lazy" decoding="async" src="webbb-11.jpg" alt="2.5D｜Factory"> 
                             </div>
                             <p class="portfolio-caption">2.5D｜Factory</p>
                         </a>
@@ -687,7 +682,7 @@
                     <div class="portfolio-item hidden">
                         <a href="fb-5.html" class="portfolio-link">
                             <div class="portfolio-image">
-                                <img src="未命名-1_工作區域 1 複本 5.jpg" alt="Facebook advertisement"> 
+                                <img loading="lazy" decoding="async" src="未命名-1_工作區域 1 複本 5.jpg" alt="Facebook advertisement"> 
                             </div>
                             <p class="portfolio-caption">Facebook advertisement-5</p>
                         </a>
@@ -695,7 +690,7 @@
                     <div class="portfolio-item hidden">
                         <a href="https://www.instagram.com/3oodpi/" class="portfolio-link">
                             <div class="portfolio-image">
-                                <img src="eq7nz-0vh8j.gif" alt="Sketch"> 
+                                <img loading="lazy" decoding="async" src="eq7nz-0vh8j.gif" alt="Sketch"> 
                             </div>
                             <p class="portfolio-caption">有的沒的 | Sketch</p>
                         </a>
@@ -711,7 +706,7 @@
             <div class="container">
                 <h1>Let's Work Together</h1>
                 <p class="chinese-text">相信有溫度的合作，能夠為您成就非凡的成果。</br>與我聯繫，讓我們攜手創造價值！</p>
-                <a href="mailto:zhangenxuan72@gmail.com" class="btn">Get in touch</a>
+                <a href="/cdn-cgi/l/email-protection#dea4b6bfb0b9bbb0a6abbfb0e9ec9eb9b3bfb7b2f0bdb1b3" class="btn">Get in touch</a>
             </div>
         </section>
     </main>
@@ -722,11 +717,37 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <!-- Optimize script loading -->
+    <script defer data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
-        document.querySelector('.nav-toggle').addEventListener('click', function() {
-            this.classList.toggle('active');
-            document.querySelector('nav').classList.toggle('active');
+        // Defer non-critical JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation toggle
+            document.querySelector('.nav-toggle').addEventListener('click', function() {
+                this.classList.toggle('active');
+                document.querySelector('nav').classList.toggle('active');
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe animated elements
+            const animatedElements = document.querySelectorAll('.hero h1, .hero p');
+            animatedElements.forEach(el => observer.observe(el));
         });
     </script>
 </body>
