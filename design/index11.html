@@ -299,6 +299,7 @@
             border-top: 0.75px solid #fff;
             z-index: 2;
         }
+        
         /*電腦*/
         @media (min-width: 768px) {
             .container {
@@ -359,21 +360,39 @@
                 font-size: 1.1rem;
             }
             .about {
-                padding: 10% 5% 10% 10%;
-                text-align: left;
+                padding: 7% 15% 10% 15%;
+                text-align: center;
             }
             .about h2 {
                 font-size: 3.8rem;
                 margin-bottom: 2rem;
                 font-weight: 900;
+                text-align: center;
             }
             .about p {
-                font-size: 1.7rem;
-                line-height: 1.5;
+                font-size: 1.5rem;
+                line-height: 1.7;
+                text-align: center;
             }
             .about .btn {
                 margin-top: 2.5rem;
-                width: 30%;
+                width: 27%;
+                margin-right: 0.7rem;
+            }
+            .btn2 {
+                text-align: center; 
+                display: inline-block;
+                background-color: #fff;
+                color: #000;
+                font-size: 1.5rem;
+                padding: 15px;
+                text-decoration: none;
+                border-radius: 7px; 
+                margin-top: 2.5rem;
+                margin-left: 0.7rem;
+                width: 27%;
+                margin-top: 2.5rem;
+                border: 1.5px solid #000;
             }
             .portfolio {
                 background-color: #000;
@@ -410,6 +429,13 @@
                 width: 25%;
                 padding-top: 23px;
                 padding-bottom: 23px;
+            }
+            .p2 {
+                color: #4d4d4d;
+                font-size: 1rem;
+                line-height: 1.7;
+                margin-bottom: 2rem;
+                text-align: center;
             }
         }
         /*手機*/
@@ -528,6 +554,12 @@
                 padding-top: 17px;
                 padding-bottom: 17px;
             }
+            .btn2 {
+                display: none;
+            }
+            .p2 {
+                display: none;
+            }
         }
         .hero p.chinese-text {
             margin-bottom: 0.5rem;
@@ -576,7 +608,9 @@
             <div class="container">
                 <h2>About me</h2>
                 <p>Hello, I am a second-year university student full of passion for design.</p>
-                <a href="index0moreinfo.html" class="btn">More info</a>
+                <div class="p2">期待能有機會與您合作！我將全心傾聽您的需求，</br>一同將設計的價值發揮到極致，讓您的品牌散發無限可能，一同迎接更多的商機與成功。</div>
+                <span><a href="index0moreinfo.html" class="btn">More info</a></span>
+                <span><a href="#contact" class="btn2">Contact</a></span>
             </div>
         </section>
 
