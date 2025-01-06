@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex.site</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'DM Sans', Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 0px;
+        }
+        header {
+            border-bottom: 0.75px solid #fff;
+            background-color: #000;
+            color: #fff;
+            padding: 1.3rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .logo-ex {
+            font-size: 2.7rem;
+            margin-right: 0.5rem;
+            line-height: 1;
+        }
+        .logo-text {
+            font-size: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.1;
+            padding-left: 5%;
+        }
+        .logo-text2 {
+            font-size: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: top;
+            line-height: 1.1;
+            margin-left: -5%;
+        }
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.7rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            transition: transform 0.3s ease;
+        }
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            margin: 6px 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .nav-toggle.active {
+            transform: rotate(90deg);
+        }
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 30px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .hero {
+            padding: 230px 3% 150px;
+            background-color: #ededed;;
+            border-bottom: 1px solid #000;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 5%;
+            right: -10%;
+            bottom: 0%;
+            background-image: url('webbb-16.png');
+            background-size: cover;
+            background-position: right;
+            background-repeat: no-repeat;
+            opacity: 1;
+            z-index: 0;
+        }
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+        }
+        .hero p {
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .about {
+            padding: 80px 3%;
+            text-align: left;
+        }
+        .about .container {
+            max-width: 800px;
+        }
+        .about h2 {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            font-weight: 900;
+        }
+        .about p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+        .about .btn {
+            text-align: center; 
+            margin-top: 0.8rem;
+            padding: 15px;
+            width: 45%;
+        }
+        .btn {
+            text-align: center; 
+            display: inline-block;
+            background-color: #000;
+            color: #fff;
+            font-size: 1.2rem;
+            padding: 15px;
+            text-decoration: none;
+            border-radius: 12px; 
+            margin-top: 1rem;
+            width: 35%;
+        }
+        .portfolio {
+            background-color: #000;
+            padding: 5% 2.5% 20%;
+            z-index: 1;
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2.5%;
+        }
+        .portfolio h2 {
+            padding: 0% 0.5% ;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            margin-top: 3rem;
+            font-weight: 900;
+            text-align: left;
+            color: #fff;
+        }
+        .portfolio-item {
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .portfolio-image {
+            aspect-ratio: 1 / 1;
+            border-radius: 2.5%; 
+            overflow: hidden;
+        }
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .portfolio-caption {
+            font-size: 0.7rem;
+            margin-top: 10px;
+            text-align: left;
+            color: #fff;
+            letter-spacing: 0.3px; 
+        }
+        .portfolio-link {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease, filter 0.3s ease;
+        }
+        .portfolio-link:hover {
+            color: #595959;
+        }
+        .portfolio-link:active {
+            filter: blur(3px);
+        }
+        .see-more {
+            text-align: left;
+            margin-top: 2rem;
+        }
+        .see-more .btn {
+            text-align: center; 
+            background-color: #fff;
+            color: #000;
+            border: 0.75px solid #000;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+            cursor: pointer;
+        }
+        .toggle-more {
+            display: none;
+        }
+        .hidden {
+            display: none;
+        }
+        .toggle-more:checked ~ .portfolio-grid .hidden {
+            display: block;
+        }
+        .toggle-more:checked ~ .see-more .btn {
+            display: none;
+        }
+        .contact {
+            padding: 13% 0% 7%;
+            background-color: #ededed;
+            position: relative;
+            overflow: hidden;
+        }
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            right: -55%;
+            bottom: 0%;
+            background-image: url('webbb-15.png');
+            background-size: cover;
+            background-position: right;
+            background-repeat: no-repeat;
+            opacity: 1;
+            z-index: 0;
+        }
+        .contact h1{
+            font-size: 3.7rem;
+            font-weight: 700;
+        }
+        .contact p{
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            line-height: 2;
+            color: #262626;
+        }
+        .contact .btn {
+            text-align: center; 
+            background-color: #000;
+            color: #ededed;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+            cursor: pointer;
+        }
+        footer {
+            color: #fff;
+            background-color: #000;
+            text-align: center;
+            padding: 70px 0;
+            border-top: 0.75px solid #fff;
+            z-index: 2;
+        }
+        
+        /*電腦*/
+        @media (min-width: 768px) {
+            .container {
+                width: 80%;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 0px;
+            }
+            header {
+                padding: 2rem 0;
+                font-size: 1.3rem;
+                font-weight: 600;/*這裏*/
+            }
+            .logo-ex {
+                font-size: 3.2rem;
+            }
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            .logo-text2 {
+                font-size: 1.3rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: top;
+                line-height: 1.1;
+                padding-left: -5%;
+            }
+            .btn {
+                font-size: 1.5rem;
+            }
+            .see-more .btn {
+                margin-top: 5rem;
+                margin-bottom: 3rem;
+                width: 25%;
+            }
+            .hero {
+                padding: 280px 0 200px;
+            }
+            .hero::before {
+                content: '';
+                position: absolute;
+                top: 15%;
+                left: 5%;
+                right: -10%;
+                bottom: 0%;
+                background-image: url('webbb-15.png');
+                background-size: cover;
+                background-position: right;
+                background-repeat: no-repeat;
+                opacity: 1;
+                z-index: 0;
+            }
+            .hero h1 {
+                font-size: 5rem;
+                line-height: 1.1;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .about {
+                padding: 7% 12.5% 10% 12.5%;
+                text-align: left;
+                display: grid;
+                grid-template-columns: 2fr 3fr;
+                gap: 2rem;
+                align-items: start;
+            }
+            .about .container {
+                max-width: none;
+                display: contents;
+            }
+            .about h2 {
+                font-size: 4.2rem;
+                margin-bottom: 2rem;
+                font-weight: 900;
+                text-align: left;
+                grid-column: 1;
+            }
+            .about p {
+                font-size: 1.7rem;
+                line-height: 1.7;
+                text-align: left;
+                grid-column: 2;
+                margin-top: 1rem;
+            }
+            .about .p2 {
+                grid-column: 2;
+                line-height: 2.5;
+                text-align: left;
+            }
+            .about .button-container {
+                grid-column: 2;
+                display: flex;
+                gap: 1.4rem;
+                margin-top: 2.5rem;
+            }
+            .about .btn {
+                margin: 0;
+                padding: 19px;
+                width: auto;
+                margin-right: 10px;
+                flex: 1;
+            }
+            .btn2 {
+                text-align: center; 
+                display: inline-block;
+                background-color: #d9d9d9;
+                color: #000;
+                font-size: 1.5rem;
+                padding: 19px;
+                text-decoration: none;
+                border-radius: 12px; 
+                margin-left: 10px;
+                width: auto;
+                flex: 1;
+            }
+            .portfolio {
+                background-color: #000;
+                padding: 5% 2.5% 10%;
+                z-index: 1;
+            }
+            .portfolio h2 {
+                padding: 0% 1% 0%;
+                font-size: 3.8rem;
+                margin-bottom: 1.6rem;
+            }
+            .portfolio-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .portfolio-caption {
+                font-size: 1.1rem;
+                margin-top: 15px;
+            }
+            .hero::before {
+                content: '';
+                position: absolute;
+                top: 15%;
+                left: 40%;
+                right: 0%;
+                bottom: 0%;
+                background-image: url('webbb-15.png');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                opacity: 1;
+                z-index: 0;
+            }
+            .contact {
+                padding: 13% 2.5% 7%;
+                background-color: #ededed;
+                position: relative;
+                overflow: hidden;
+            }
+            .contact::before {
+                content: '';
+                position: absolute;
+                top: 0%;
+                left: 0%;
+                right: -35%;
+                bottom: 0%;
+                background-image: url('webbb-15.png');
+                background-size: cover;
+                background-position: right;
+                background-repeat: no-repeat;
+                opacity: 0;
+                z-index: 0;
+            }
+            .contact h1{
+                font-size: 4.2rem;
+                font-weight: 700;
+            }
+            .contact .btn {
+                width: 25%;
+                padding-top: 23px;
+                padding-bottom: 23px;
+            }
+            .p2 {
+                color: #4d4d4d;
+                font-size: 1rem;
+                line-height: 1.7;
+                margin-bottom: 2rem;
+                text-align: left;
+            }
+        }
+        /*手機*/
+        @media (max-width: 767px) {
+            .nav-toggle {
+                display: block;
+            }
+            nav {
+                display: none;
+            }
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #000;
+                padding-left: 7%;
+                padding-bottom: 5%;
+            }
+            nav.active ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav.active ul li {
+                margin: 10px 0;
+            }
+            nav.active ul li a {
+                font-size: 1.2rem;
+            }
+            .see-more {
+                text-align: left;
+            }
+            .see-more .btn {
+                text-align: center; 
+                background-color: #fff;
+                font-size: 0.9rem;
+                color: #000;
+                margin-top: 1rem;
+                margin-bottom: 3rem;
+                cursor: pointer;
+            }
+            .btn {
+                text-align: center; 
+                display: inline-block;
+                background-color: #000;
+                color: #fff;
+                padding: 15px;
+                text-decoration: none;
+                border-radius: 5.5px; 
+                margin-top: 1rem;
+                width: 35%;
+            }
+            .hero::before {
+                content: '';
+                position: absolute;
+                top: 10%;
+                left: 0%;
+                right: -45%;
+                bottom: 0%;
+                background-image: url('webbb-16.png');
+                background-size: cover;
+                background-position: right;
+                background-repeat: no-repeat;
+                opacity: 1;
+                z-index: 0;
+            }
+            .hero h1 {
+                font-size: 2.3rem;
+                line-height: 1.2;
+                font-weight: 800;
+            }
+            .hero p {
+                font-size: 0.8rem;
+            }
+            .about h2 {
+                margin-bottom: 0.8rem;
+                font-size: 2.3rem;
+                font-weight: 800;
+                letter-spacing: -0.5px; 
+            }
+            .about p {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+            .portfolio {
+                background-color: #000;
+                padding: 1% 2.5% 7%;
+                z-index: 1;
+            }
+            .portfolio-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px 4%;
+            }
+            .portfolio h2 {
+                padding: 2% 1% 0%;
+                font-size: 2.3rem;
+                font-weight: 800;
+                margin-bottom: 1.6rem;
+            }
+            .portfolio-caption {
+                margin-bottom: 12px;
+            }
+            .portfolio-image {
+                border-radius: 5.5px; 
+            }
+            .contact {
+                padding: 35% 3.5% 23%;
+            }
+            .contact h1{
+                font-size: 2.4rem;
+                letter-spacing: -1px; 
+            }
+            .contact p{
+                margin-top: 1rem;
+                font-size: 0.8rem;
+                padding-left: 1%;
+            }
+            .contact .btn {
+                width: 45%;
+                font-size: 1rem;
+                padding-top: 17px;
+                padding-bottom: 17px;
+            }
+            .btn2 {
+                display: none;
+            }
+            .p2 {
+                display: none;
+            }
+        }
+        .hero p.chinese-text {
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        /* New styles for scrolling animation */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-animate.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <span class="logo-ex">EX</span> 
+                <div class="logo-text2">
+                    <span>&copy;</span></br>
+                </div>
+                <div class="logo-text">
+                    <span>DESIGN</span>
+                    <span>STUDIO</span>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="index0moreinfo.html">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 class="scroll-animate">Customer-Focused.<br>Professionally Executed.</h1>
+                <p class="chinese-text scroll-animate">客戶至上，專業至臻</p>
+                <p class="chinese-text scroll-animate">以專業回應信任，為您的品牌實現價值。</p>
+            </div>
+        </section>
+
+        <section class="about">
+            <div class="container">
+                <h2 class="scroll-animate">About me</h2>
+                <p class="scroll-animate">Hello, I am a second-year university student full of passion for design.</p>
+                <div class="p2 scroll-animate">期待能有機會與您合作！我將全心傾聽您的需求，一同將設計的價值發揮到極致，讓您的品牌散發無限可能，共同迎接更多的商機與成功。</div>
+                <div class="button-container scroll-animate">
+                    <a href="index0moreinfo.html" class="btn">More info</a>
+                    <a href="#contact" class="btn2">Contact</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="work" class="portfolio">
+            <div class="container">
+                <h2 class="scroll-animate">WORK</h2>
+                <input type="checkbox" id="toggle-more" class="toggle-more">
+                <div class="portfolio-grid">
+                    <div class="portfolio-item scroll-animate">
+                        <a href="index8.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="未命名-1-13.jpg" alt="Social media advertisement-1">    
+                            </div>
+                            <p class="portfolio-caption">Facebook Advertisement-1</p>
+                        </a>
+                    </div>
+                    <div class="portfolio-item scroll-animate">
+                        <a href="index12345.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="webbb-12.jpg" alt="Social media advertisement-2">
+                            </div>
+                            <p class="portfolio-caption">Facebook Advertisement-2</p>
+                        </a>
+                    </div>
+                    <div class="portfolio-item scroll-animate">
+                        <a href="index7.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="未命名-4_工作區域 1 複本 17.jpg" alt="Facebook advertisement"> 
+                            </div>
+                            <p class="portfolio-caption">Facebook Advertisement-3</p>
+                        </a>
+                    </div>
+                    <div class="portfolio-item scroll-animate">
+                        <a href="index6.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="webbb-07.jpg" alt="Facebook advertisement-4"> 
+                            </div>
+                            <p class="portfolio-caption">Facebook Advertisement-4</p>
+                        </a>
+                    </div>
+                    <div class="portfolio-item scroll-animate">
+                        <a href="index9.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="webbb-13.jpg" alt="日月老茶廠｜識別設計">
+                            </div>
+                            <p class="portfolio-caption">日月老茶廠｜識別設計</p>
+                        </a>
+                    </div>
+                    <div class="portfolio-item scroll-animate">
+                        <a href="index0ad.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="more縮圖.jpg" alt="圖文廣告｜AD&EDM">
+                            </div>
+                            <p class="portfolio-caption">圖文廣告｜AD&EDM</p>
+                        </a>
+                    </div>
+                    <!-- Hidden items -->
+                    <div class="portfolio-item hidden scroll-animate">
+                        <a href="index0illustration.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="more縮圖.jpg" alt="插畫 | illustration"> 
+                            </div>
+                            <p class="portfolio-caption">插畫 | Illustration</p>
+                        </a>
+                    </div>
+                    <div class="portfolio-item hidden scroll-animate">
+                        <a href="factory.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="webbb-11.jpg" alt="2.5D｜Factory"> 
+                            </div>
+                            <p class="portfolio-caption">2.5D｜Factory</p>
+                        </a>
+                    </div>
+                  
+                    <div class="portfolio-item hidden scroll-animate">
+                        <a href="https://www.instagram.com/3oodpi/" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="eq7nz-0vh8j.gif" alt="Sketch"> 
+                            </div>
+                            <p class="portfolio-caption">有的沒的 | Sketch</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="see-more scroll-animate">
+                    <label for="toggle-more" class="btn">See More</label>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact">
+            <div class="container">
+                <h1 class="scroll-animate">Let's Work Together</h1>
+                <p class="chinese-text scroll-animate">相信有溫度的合作，能夠為您成就非凡的成果。</br>與我聯繫，讓我們攜手創造價值！</p>
+                <a href="mailto:zhangenxuan72@gmail.com" class="btn scroll-animate">Get in touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2024 Enxuan Zhang. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // Scrolling animation
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        function handleScrollAnimation() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            elements.forEach((el) => {
+                if (isElementInViewport(el)) {
+                    el.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('load', handleScrollAnimation);
+        window.addEventListener('scroll', handleScrollAnimation);
+        window.addEventListener('resize', handleScrollAnimation);
+    </script>
+</body>
+</html>
