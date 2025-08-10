@@ -9,7 +9,7 @@
         body {
             margin: 0;
             padding: 0;
-            background: #f2f2f2;
+            background: #eeeeef;
             color: #000;
             font-family:'DM Sans', Arial, sans-serif;
         }
@@ -17,6 +17,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 7% 5%;
+            box-sizing: border-box;
         }
         .hero {
             padding: 20px 0;
@@ -55,6 +56,20 @@
             height: auto;
             display: block;
         }
+        /* GIF並排顯示的樣式 */
+        .gif-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .gif-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
         .back-btn {
             text-align: right; /* 按鈕靠右對齊 */
             margin: 20px;      /* 與周圍留出間距 */ 
@@ -79,15 +94,15 @@
         }
         @media (min-width: 768px) {
             .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 17% 5%;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 17% 5%;
             }
             .title {
-            font-size: 3.2rem;
-            color: #000;
-            margin: 0;
-            font-weight: 900;
+                font-size: 3.2rem;
+                color: #000;
+                margin: 0;
+                font-weight: 900;
             }
             .subtitle {
                 font-size: 1.7rem;
@@ -100,6 +115,17 @@
             .back-btn {
                 text-align: right; /* 按鈕靠右對齊 */
                 margin: 20px;      /* 與周圍留出間距 */ 
+            }
+            /* 在桌面版讓GIF圖片並排 */
+            .gif-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 12% 5%;
             }
         }
 
@@ -135,6 +161,10 @@
             <img src="未命名-2-3.webp" alt="123">
             <img src="webbb-19.webp" alt="123">
             <img src="webbb-29.webp" alt="123">
+        </div>
+        <div class="gif-container">
+            <img src="IMG_2648.GIF" alt="123">
+            <img src="IMG_2651.GIF" alt="123">
         </div>
         <div class="back-btn">
             <a href="index11.html"> Back →</a>
