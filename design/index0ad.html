@@ -57,6 +57,19 @@
             display: block;
         }
         /* GIF並排顯示的樣式 */
+        .webp-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        
+        .webp-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 7px;
+        }
         .gif-container {
             display: grid;
             grid-template-columns: 1fr;
@@ -121,6 +134,13 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 40px;
             }
+            .webp-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .webp-container img {
+                border-radius: 0px;
+            }
         }
 
         @media (min-width: 1024px) {
@@ -158,11 +178,13 @@
             <img src="廣告圖合集-02.webp" alt="123">
             <img src="廣告圖合集-03.webp" alt="123">
         </div>
-        <div class="gif-container">
+        <div class="webp-container">
             <img src="廣告圖合集05-08-05.webp" alt="123">
             <img src="廣告圖合集05-08-06.webp" alt="123">
             <img src="廣告圖合集05-08-07.webp" alt="123">
             <img src="廣告圖合集05-08-08.webp" alt="123">
+        </div>
+        <div class="gif-container">
             <img src="IMG_2747.gif" alt="123">
             <img src="IMG_2763.gif" alt="123">
             <img src="IMG_2766.gif" alt="123">
