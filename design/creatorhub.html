@@ -34,10 +34,9 @@
         }
         .project-info {
             padding: 10px 0;
-        
         }
         .info-item {
-            margin: 10px 0 5px;
+            margin: 10px 0;
             display: flex;
             gap: 20px;
         }
@@ -45,68 +44,79 @@
             color: #666;
             width: 80px;
         }
+
+        /* --- 圖片網格優化區 --- */
         .image-grid {
             display: grid;
             gap: 40px;
-            padding: 0px 0% 5%;
+            padding: 10px 0%;
         }
+
+        /* 1. 骨架屏佔位樣式（圖片還沒出來前的灰色閃爍塊） */
+        .image-placeholder {
+            width: 100%;
+            background: linear-gradient(90deg, #f5f5f5 25%, #eeeeee 50%, #f5f5f5 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite; /* 閃爍動畫 */
+            border-radius: 4px;
+            overflow: hidden;
+            /* 建議根據你圖片的大致比例設定，16/10 較符合一般 App 截圖的視覺 */
+            aspect-ratio: 16 / 10; 
+        }
+
+        /* 2. 閃爍動畫定義 */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* 3. 圖片初始狀態：隱藏並準備淡入 */
         .image-grid img {
             width: 100%;
             height: auto;
             display: block;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out; /* 淡入時間可改這裡 */
         }
+
+        /* 4. 圖片載入後的狀態 */
+        .image-grid img.loaded {
+            opacity: 1;
+        }
+
         .back-btn {
-            text-align: right; /* 按鈕靠右對齊 */
-            margin: 20px;      /* 與周圍留出間距 */ 
-            font-family:'DM Sans';
+            text-align: right;
+            margin: 20px;
         }
-
-        /* 按鈕樣式 */
         .back-btn a {
-            font-size: 1.3rem;          /* 字體大小 */
-            text-decoration: none;    /* 去除底線 */
-            color: black;             /* 字體顏色 */
-            font-weight: 700;         /* 適度加粗 */
-            display: inline-flex;      /* 讓文字與箭頭在同一行 */
-            align-items: center;       /* 文字與箭頭垂直居中 */
+            font-size: 1.3rem;
+            text-decoration: none;
+            color: black;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
             gap: 8px;   
-            transition: transform 0.3s ease, color 0.3s ease; /* 添加平滑效果 */
+            transition: transform 0.3s ease;
+        }
+        .back-btn a:hover {
+            transform: translateX(5px);
         }
 
-        .back-btn a:hover {
-            transform: translateX(5px); /* 懸停時向右滑動 5px */
-            color: #666;             /* 懸停時文字變色 */
-        }
+        /* 響應式設定 */
         @media (min-width: 768px) {
             .container {
-                max-width: 1200px;
-                margin: 0 auto;
                 padding: 0 15% 5%;
             }
             .image-grid {
-                display: grid;
-                gap: 40px;
-                padding: 0px 15% 5%;
+                padding: 0 15% 5%;
             }
             .title {
-            font-size: 3.2rem;
-            color: #000;
-            margin: 0;
-            font-weight: 900;
+                font-size: 3.2rem;
             }
             .subtitle {
                 font-size: 1.7rem;
-                margin-top: 10px;
-            }
-            .project-info {
-                padding: 20px 0;
-            }
-            .back-btn {
-                text-align: right; /* 按鈕靠右對齊 */
-                margin: 20px;      /* 與周圍留出間距 */ 
             }
         }
-
     </style>
 </head>
 <body>
@@ -127,14 +137,49 @@
             </div>
         </section>
     </div>
-        <div class="image-grid">
-            <img src="creator hub uiux-08.webp" alt="123">
-            <img src="creator hub uiux-02.webp" alt="123">
-            
-            <div class="back-btn">
-                <a href="index11.html"> Back →</a>
-            </div>
+
+    <div class="image-grid">
+        <div class="image-placeholder">
+            <img src="creator hub uiux-08.webp" alt="CreatorHub UI 1" loading="lazy" onload="imgLoaded(this)">
+        </div>
+        
+        <div class="image-placeholder">
+            <img src="creator hub uiux-02.webp" alt="CreatorHub UI 2" loading="lazy" onload="imgLoaded(this)">
+        </div>
+
+
+        <div class="back-btn">
+            <a href="index11.html"> Back →</a>
         </div>
     </div>
+
+    <script>
+        /**
+         * 圖片載入完成後的處理函數
+         * @param {HTMLElement} img - 圖片標籤本身
+         */
+        function imgLoaded(img) {
+            // 讓圖片淡入
+            img.classList.add('loaded');
+            
+            // 處理外層佔位容器
+            const container = img.parentElement;
+            // 停止閃爍動畫，節省瀏覽器效能
+            container.style.animation = 'none';
+            // 移除灰色背景
+            container.style.background = 'transparent';
+            // 移除 aspect-ratio，讓容器跟隨圖片實際高度
+            container.style.aspectRatio = 'auto';
+        }
+
+        // 額外保險：如果圖片已經在快取中，可能不會觸發 onload，所以我們手動檢查一次
+        window.addEventListener('load', function() {
+            document.querySelectorAll('.image-grid img').forEach(function(img) {
+                if (img.complete) {
+                    imgLoaded(img);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
