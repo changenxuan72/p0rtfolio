@@ -34,7 +34,6 @@
         }
         .project-info {
             padding: 20px 0;
-            
         }
         .info-item {
             margin: 10px 0;
@@ -45,94 +44,107 @@
             color: #666;
             width: 80px;
         }
+
+        /* 圖片網格優化 */
         .image-grid {
             display: grid;
             gap: 40px;
             padding: 10px 0%;
         }
+
+        /* 骨架屏佔位樣式 */
+        .image-placeholder {
+            width: 100%;
+            background: linear-gradient(90deg, #f5f5f5 25%, #eeeeee 50%, #f5f5f5 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            overflow: hidden;
+            /* 預設一個常見的長方形比例，防止頁面長度塌陷 */
+            aspect-ratio: 16 / 10; 
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
         .image-grid img {
             width: 100%;
             height: auto;
             display: block;
+            opacity: 0; /* 初始隱藏 */
+            transition: opacity 0.6s ease-in-out;
         }
+
+        /* 圖片載入後的類別 */
+        .image-grid img.loaded {
+            opacity: 1;
+        }
+
         .figma-btn {
-            text-align: center; /* 按鈕靠右對齊 */
-            margin: 20px;      /* 與周圍留出間距 */ 
+            text-align: center;
+            margin: 20px;
             font-family:'DM Sans';
         }
         .figma-btn a {
-            font-size: 1.3rem;          /* 字體大小 */
+            font-size: 1.3rem;
             letter-spacing: -0.2px; 
-            text-decoration: none;    /* 去除底線 */
-            color: #30727D;             /* 字體顏色 */
-            font-weight: 700;         /* 適度加粗 */
-            display: inline-flex;      /* 讓文字與箭頭在同一行 */
-            align-items: center;       /* 文字與箭頭垂直居中 */
+            text-decoration: none;
+            color: #30727D;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
             gap: 8px;   
-            transition: transform 0.3s ease, color 0.3s ease; /* 添加平滑效果 */
+            transition: transform 0.3s ease, color 0.3s ease;
         }
 
         .figma-btn a:hover {
-            transform: translateY(5px); /* 懸停時向右滑動 5px */
-            color: #12d0b5;             /* 懸停時文字變色 */
+            transform: translateY(5px);
+            color: #12d0b5;
         }
         .back-btn {
-            text-align: right; /* 按鈕靠右對齊 */
-            margin: 20px;      /* 與周圍留出間距 */ 
+            text-align: right;
+            margin: 20px;
             font-family:'DM Sans';
         }
 
-        /* 按鈕樣式 */
         .back-btn a {
-            font-size: 1.3rem;          /* 字體大小 */
-            text-decoration: none;    /* 去除底線 */
-            color: black;             /* 字體顏色 */
-            font-weight: 700;         /* 適度加粗 */
-            display: inline-flex;      /* 讓文字與箭頭在同一行 */
-            align-items: center;       /* 文字與箭頭垂直居中 */
+            font-size: 1.3rem;
+            text-decoration: none;
+            color: black;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
             gap: 8px;   
-            transition: transform 0.3s ease, color 0.3s ease; /* 添加平滑效果 */
+            transition: transform 0.3s ease, color 0.3s ease;
         }
 
         .back-btn a:hover {
-            transform: translateX(5px); /* 懸停時向右滑動 5px */
-            color: #666;             /* 懸停時文字變色 */
+            transform: translateX(5px);
+            color: #666;
         }
+
         @media (min-width: 768px) {
             .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15% 5%;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 15% 5%;
             }
             .title {
-            font-size: 3.2rem;
-
-            margin: 0;
-            font-weight: 900;
+                font-size: 3.2rem;
+                font-weight: 900;
             }
             .subtitle {
                 font-size: 1.7rem;
-                margin-top: 10px;
-            }
-            .project-info {
-                padding: 20px 0;
-                
             }
             .image-grid {
-                display: grid;
-                gap: 40px;
                 padding: 0 15% 5%;
             }
             .figma-btn a {
-            font-size: 2rem;          /* 字體大小 */
-            }
-
-            .back-btn {
-                text-align: right; /* 按鈕靠右對齊 */
-                margin: 20px;      /* 與周圍留出間距 */ 
+                font-size: 2rem;
             }
         }
-
     </style>
 </head>
 <body>
@@ -142,7 +154,6 @@
             <div class="subtitle">Simplify Prescriptions, Empower Your Health</div>
         </header>
         <section class="project-info">
-
             <div class="info-item">
                 <span class="info-label">SECTION</span>
                 <span>UI UX / VI Design</span>
@@ -153,18 +164,49 @@
             </div>
         </section>
     </div>
-        <div class="image-grid">
-            <img src="rxease_new-04.webp" alt="123">
-            <img src="rxease_new-05.webp" alt="123">
-            <img src="rxease_new-03.webp" alt="123">
-         <div class="figma-btn">
+
+    <div class="image-grid">
+        <div class="image-placeholder">
+            <img src="rxease_new-04.webp" alt="RxEase Interface 1" loading="lazy" onload="imgLoaded(this)">
+        </div>
+        
+        <div class="image-placeholder">
+            <img src="rxease_new-05.webp" alt="RxEase Interface 2" loading="lazy" onload="imgLoaded(this)">
+        </div>
+
+        <div class="image-placeholder">
+            <img src="rxease_new-03.webp" alt="RxEase Interface 3" loading="lazy" onload="imgLoaded(this)">
+        </div>
+
+        <div class="figma-btn">
              <a href="https://www.figma.com/proto/jpw4UQ9bhSipTf7Bex2WDk/rxease?page-id=0%3A1&node-id=4-95&p=f&viewport=90%2C207%2C0.31&t=lHuJW9YztoAwReoo-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1%3A2">🔗 View more in Figma</a>
         </div>
         <div class="back-btn">
             <a href="index11.html"> Back →</a>
         </div>
     </div>
-       
-    </div>
+
+    <script>
+        // 當圖片載入完成時觸發
+        function imgLoaded(img) {
+            // 顯示圖片
+            img.classList.add('loaded');
+            // 停止父層的閃爍動畫並移除背景色
+            const container = img.parentElement;
+            container.style.animation = 'none';
+            container.style.background = 'transparent';
+            // 移除 aspect-ratio 讓圖片恢復原始比例
+            container.style.aspectRatio = 'auto';
+        }
+
+        // 檢查是否已經在快取中 (預防 onload 事件沒被捕捉到)
+        window.addEventListener('load', function() {
+            document.querySelectorAll('.image-grid img').forEach(function(img) {
+                if (img.complete) {
+                    imgLoaded(img);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
