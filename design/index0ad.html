@@ -46,17 +46,41 @@
             color: #666;
             width: 80px;
         }
+
+        /* 骨架屏與圖片動畫優化 */
+        .image-placeholder {
+            width: 100%;
+            background: linear-gradient(90deg, #e5e5e5 25%, #d6d6d6 50%, #e5e5e5 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1; /* 預設正方形，適用於廣告圖 */
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+
+        img.loaded {
+            opacity: 1;
+        }
+
         .image-grid {
             display: grid;
             gap: 40px;
             padding: 40px 0;
         }
-        .image-grid img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        /* GIF並排顯示的樣式 */
+        
         .webp-container {
             display: grid;
             grid-template-columns: 1fr;
@@ -64,12 +88,8 @@
             margin-bottom: 60px;
         }
         
-        .webp-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 7px;
-        }
+        .webp-container .image-placeholder { border-radius: 7px; }
+
         .gif-container {
             display: grid;
             grid-template-columns: 1fr;
@@ -77,34 +97,28 @@
             margin-bottom: 40px;
         }
         
-        .gif-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
         .back-btn {
-            text-align: right; /* 按鈕靠右對齊 */
-            margin: 20px;      /* 與周圍留出間距 */ 
+            text-align: right;
+            margin: 20px;
             font-family:'DM Sans';
         }
 
-        /* 按鈕樣式 */
         .back-btn a {
-            font-size: 1.3rem;          /* 字體大小 */
-            text-decoration: none;    /* 去除底線 */
-            color: black;             /* 字體顏色 */
-            font-weight: 700;         /* 適度加粗 */
-            display: inline-flex;      /* 讓文字與箭頭在同一行 */
-            align-items: center;       /* 文字與箭頭垂直居中 */
+            font-size: 1.3rem;
+            text-decoration: none;
+            color: black;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
             gap: 8px;   
-            transition: transform 0.3s ease, color 0.3s ease; /* 添加平滑效果 */
+            transition: transform 0.3s ease, color 0.3s ease;
         }
 
         .back-btn a:hover {
-            transform: translateX(5px); /* 懸停時向右滑動 5px */
-            color: #666;             /* 懸停時文字變色 */
+            transform: translateX(5px);
+            color: #666;
         }
+
         @media (min-width: 768px) {
             .container {
                 max-width: 1200px;
@@ -113,23 +127,11 @@
             }
             .title {
                 font-size: 3.2rem;
-                color: #000;
-                margin: 0;
                 font-weight: 900;
             }
             .subtitle {
                 font-size: 1.7rem;
-                margin-top: 10px;
             }
-            .project-info {
-                padding: 20px 0;
-                border-bottom: 1px solid #333;
-            }
-            .back-btn {
-                text-align: right; /* 按鈕靠右對齊 */
-                margin: 20px;      /* 與周圍留出間距 */ 
-            }
-            /* 在桌面版讓GIF圖片並排 */
             .gif-container {
                 grid-template-columns: 1fr 1fr;
                 gap: 40px;
@@ -138,17 +140,12 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 70px 12px;
             }
-            .webp-container img {
-                border-radius: 0px;
-            }
+            .webp-container .image-placeholder { border-radius: 0px; }
         }
 
         @media (min-width: 1024px) {
-            .container {
-                padding: 0 12% 5%;
-            }
+            .container { padding: 0 12% 5%; }
         }
-
     </style>
 </head>
 <body>
@@ -169,33 +166,51 @@
             </div>
             <div class="info-item">
                 <span class="info-label">YEAR</span>
-                <span>---</span>
+                <span>2025</span>
             </div>
         </section>
 
         <div class="image-grid">
-            <img src="廣告圖合集_工作區域 1.webp" alt="123">
-            <img src="廣告圖合集-08.webp" alt="123">
-            <img src="廣告圖合集-02.webp" alt="123">
-            <img src="廣告圖合集-03.webp" alt="123">
+            <div class="image-placeholder"><img src="廣告圖合集_工作區域 1.webp" alt="AD 1" loading="lazy" onload="imgLoaded(this)"></div>
+            <div class="image-placeholder"><img src="廣告圖合集-08.webp" alt="AD 2" loading="lazy" onload="imgLoaded(this)"></div>
+            <div class="image-placeholder"><img src="廣告圖合集-02.webp" alt="AD 3" loading="lazy" onload="imgLoaded(this)"></div>
+            <div class="image-placeholder"><img src="廣告圖合集-03.webp" alt="AD 4" loading="lazy" onload="imgLoaded(this)"></div>
         </div>
+
         <div class="webp-container">
-            <img src="廣告圖合集05-08-05.webp" alt="123">
-            <img src="廣告圖合集05-08-06.webp" alt="123">
-            <img src="廣告圖合集05-08-07.webp" alt="123">
-            <img src="廣告圖合集05-08-08.webp" alt="123">
-            <img src="廣告圖合集-910-09.webp" alt="123">
-            <img src="廣告圖合集-910-10.webp" alt="123">
+            <div class="image-placeholder"><img src="廣告圖合集05-08-05.webp" alt="AD 5" loading="lazy" onload="imgLoaded(this)"></div>
+            <div class="image-placeholder"><img src="廣告圖合集05-08-06.webp" alt="AD 6" loading="lazy" onload="imgLoaded(this)"></div>
+            <div class="image-placeholder"><img src="廣告圖合集05-08-07.webp" alt="AD 7" loading="lazy" onload="imgLoaded(this)"></div>
+            <div class="image-placeholder"><img src="廣告圖合集05-08-08.webp" alt="AD 8" loading="lazy" onload="imgLoaded(this)"></div>
+            <div class="image-placeholder"><img src="廣告圖合集-910-09.webp" alt="AD 9" loading="lazy" onload="imgLoaded(this)"></div>
+            <div class="image-placeholder"><img src="廣告圖合集-910-10.webp" alt="AD 10" loading="lazy" onload="imgLoaded(this)"></div>
         </div>
+
         <div class="gif-container">
-            <img src="IMG_2747.gif" alt="123">
-            <img src="IMG_2763.gif" alt="123">
-            <img src="IMG_2766.gif" alt="123">
-            <img src="IMG_2779.gif" alt="123">
+            <div class="image-placeholder"><img src="IMG_2747.gif" alt="GIF 1" loading="lazy" onload="imgLoaded(this)"></div>
+            <div class="image-placeholder"><img src="IMG_2763.gif" alt="GIF 2" loading="lazy" onload="imgLoaded(this)"></div>
+            <div class="image-placeholder"><img src="IMG_2766.gif" alt="GIF 3" loading="lazy" onload="imgLoaded(this)"></div>
+            <div class="image-placeholder"><img src="IMG_2779.gif" alt="GIF 4" loading="lazy" onload="imgLoaded(this)"></div>
         </div>
+
         <div class="back-btn">
             <a href="index11.html"> Back →</a>
         </div>
     </div>
+
+    <script>
+        function imgLoaded(img) {
+            img.classList.add('loaded');
+            const container = img.parentElement;
+            container.style.animation = 'none';
+            container.style.background = 'transparent';
+            container.style.aspectRatio = 'auto';
+        }
+        window.addEventListener('load', function() {
+            document.querySelectorAll('img').forEach(function(img) {
+                if (img.complete) imgLoaded(img);
+            });
+        });
+    </script>
 </body>
 </html>
