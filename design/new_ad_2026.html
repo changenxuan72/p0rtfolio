@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能辦公App｜UiUx Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #1a1a1a;
+            color: #666;
+            font-family:'DM Sans', Arial, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 7% 3%;
+        }
+        .hero {
+            padding: 20px 0;
+        }
+        .title {
+            font-size: 1.6rem;
+            color: #fff;
+            margin: 0;
+            font-weight: 900;
+        }
+        .subtitle {
+            font-size: 1rem;
+            margin-top: 10px;
+            color: #888;
+        }
+        .project-info {
+            padding: 20px 0;
+        }
+        .info-item {
+            margin: 10px 0;
+            display: flex;
+            gap: 20px;
+        }
+        .info-label {
+            color: #999;
+            width: 80px;
+        }
+
+        /* 圖片網格優化 */
+        .image-grid {
+            display: grid;
+            gap: 40px;
+            padding: 10px 0%;
+        }
+
+        /* 骨架屏佔位樣式 */
+        .image-placeholder {
+            width: 100%;
+            background: linear-gradient(90deg, #f5f5f5 25%, #eeeeee 50%, #f5f5f5 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            overflow: hidden;
+            /* 預設一個常見的長方形比例，防止頁面長度塌陷 */
+            aspect-ratio: 16 / 20; 
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0; /* 初始隱藏 */
+            transition: opacity 0.6s ease-in-out;
+        }
+
+        /* 圖片載入後的類別 */
+        .image-grid img.loaded {
+            opacity: 1;
+        }
+
+        .back-btn {
+            text-align: right;
+            margin: 20px;
+            font-family:'DM Sans';
+        }
+
+        .back-btn a {
+            font-size: 1.3rem;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;   
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .back-btn a:hover {
+            transform: translateX(5px);
+            color: #666;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 15% 5%;
+            }
+            .title {
+                font-size: 3.2rem;
+                font-weight: 900;
+            }
+            .subtitle {
+                font-size: 1.7rem;
+            }
+            .image-grid {
+                padding: 0 15% 5%;
+            }
+            .figma-btn a {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <h1 class="title">FACEBOOK MARKETING AND ADVERTISING</h1>
+            <div class="subtitle">Social media advertisement on Facebook platform</div>
+        </header>
+
+        <section class="project-info">
+            <div class="info-item">
+                <span class="info-label">SECTION</span>
+                <span>Advertisement / icon Design</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">YEAR</span>
+                <span>2026</span>
+            </div>
+        </section>
+    </div>
+
+    <div class="image-grid">
+        <div class="image-placeholder">
+            <img src="new_ad_再不做廣告我喝西北風.webp" alt="RxEase Interface 1" loading="lazy" onload="imgLoaded(this)">
+        </div>
+        <div class="back-btn">
+            <a href="index11.html"> Back →</a>
+        </div>
+    </div>
+
+    <script>
+        // 當圖片載入完成時觸發
+        function imgLoaded(img) {
+            // 顯示圖片
+            img.classList.add('loaded');
+            // 停止父層的閃爍動畫並移除背景色
+            const container = img.parentElement;
+            container.style.animation = 'none';
+            container.style.background = 'transparent';
+            // 移除 aspect-ratio 讓圖片恢復原始比例
+            container.style.aspectRatio = 'auto';
+        }
+
+        // 檢查是否已經在快取中 (預防 onload 事件沒被捕捉到)
+        window.addEventListener('load', function() {
+            document.querySelectorAll('.image-grid img').forEach(function(img) {
+                if (img.complete) {
+                    imgLoaded(img);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
