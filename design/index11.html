@@ -219,18 +219,44 @@
             flex-direction: column;
             position: relative;
         }
+        
+        /* --- 圖片閃爍載入優化 --- */
         .portfolio-image {
             aspect-ratio: 1 / 1;
             border-radius: 2.5%; 
             overflow: hidden;
-            background-color: #ccc;
+            background: #222; /* 預設深色底適配黑色背景 */
+            background-image: linear-gradient(
+                90deg, 
+                #1a1a1a 25%, 
+                #333333 50%, 
+                #1a1a1a 75%
+            );
+            background-size: 200% 100%;
+            animation: loading-shimmer 1.5s infinite;
         }
         .portfolio-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+            opacity: 0; /* 圖片載入前完全透明，防止問號出現 */
+            transition: opacity 0.5s ease-in-out;
         }
+        /* 當 JS 偵測載入完成後 */
+        .portfolio-image.loaded {
+            animation: none;
+            background: transparent;
+        }
+        .portfolio-image.loaded img {
+            opacity: 1;
+        }
+        @keyframes loading-shimmer {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
+        /* ---------------------- */
+
         .portfolio-caption {
             font-size: 0.7rem;
             margin-top: 10px;
@@ -542,7 +568,7 @@
                 text-align: center;
                 padding: 70px 0;
                 border-top: 0.75px solid #fff;
-                border-bottom: 0.75px solid #000;
+                border-bottom: 1px solid #000;
                 z-index: 2;
                 font-size: 1rem;
                 line-height: 2;
@@ -927,7 +953,6 @@
                     <a href="#contact" class="btn2">Contact</a>
                 </div>
                 
-                <!-- 手機版專用內容 -->
                 <h2 class="mobile-only scroll-animate">ABOUT</h2>
                 <div class="about-image-container mobile-only scroll-animate"></div>
                 <div class="main-title mobile-only scroll-animate">設計，</div>
@@ -954,9 +979,7 @@
                     </div>
                 </div>
                 <div class="portfolio-grid">
-                    <!-- 前6項 (顯示在 See More 之前) -->
-                     <!-- 1. creatorhub -->
-                     <div class="portfolio-item scroll-animate" data-category="uiux branding">
+                    <div class="portfolio-item scroll-animate" data-category="uiux branding">
                         <a href="creatorhub.html" class="portfolio-link">
                             <div class="portfolio-image">
                                 <img src="creator hub uiux-04.webp" alt="CreatorHub｜UI UX Design">
@@ -966,7 +989,6 @@
                     </div>
                     
 
-                    <!-- 2. Facebook Advertisement-2 -->
                     <div class="portfolio-item scroll-animate" data-category="self-promotion">
                         <a href="index12345.html" class="portfolio-link">
                             <div class="portfolio-image">
@@ -976,7 +998,6 @@
                         </a>
                     </div>
                     
-                    <!-- 3. Facebook Advertisement-3 -->
                     <div class="portfolio-item scroll-animate" data-category="self-promotion">
                         <a href="index7.html" class="portfolio-link">
                             <div class="portfolio-image">
@@ -986,8 +1007,7 @@
                         </a>
                     </div>
 
-                     <!-- 4. Facebook Advertisement-->
-                    <div class="portfolio-item scroll-animate" data-category="self-promotion">
+                     <div class="portfolio-item scroll-animate" data-category="self-promotion">
                         <a href="new_ad_2026.html" class="portfolio-link">
                             <div class="portfolio-image">
                                 <img src="adcover-01.webp" alt="Facebook Advertisement">
@@ -996,7 +1016,6 @@
                         </a>
                     </div>
     
-                    <!-- 5. 智能辦公APP -->
                     <div class="portfolio-item scroll-animate" data-category="uiux branding">
                         <a href="officemate_new .html" class="portfolio-link">
                             <div class="portfolio-image">
@@ -1006,7 +1025,6 @@
                         </a>
                     </div>
                     
-                    <!-- 6. AD&EDM -->
                     <div class="portfolio-item scroll-animate" data-category="ad-edm">
                         <a href="index0ad.html" class="portfolio-link">
                             <div class="portfolio-image">
@@ -1016,9 +1034,6 @@
                         </a>
                     </div>
                     
-                    <!-- See More 後的項目 -->
-                    
-                    <!-- 7. 小專 -->
                     <div class="portfolio-item scroll-animate" data-category="uiux branding">
                         <a href="小專.html" class="portfolio-link">
                             <div class="portfolio-image">
@@ -1028,7 +1043,6 @@
                         </a>
                     </div>
 
-                     <!-- 4. EnDoPure-->
                      <div class="portfolio-item scroll-animate" data-category="branding">
                         <a href="pet_new.html" class="portfolio-link">
                             <div class="portfolio-image">
@@ -1038,8 +1052,7 @@
                         </a>
                     </div>
                     
-                    <!-- 9. 醫療健康APP -->
-                     <div class="portfolio-item scroll-animate" data-category="uiux branding">
+                    <div class="portfolio-item scroll-animate" data-category="uiux branding">
                         <a href="rxease_new.html" class="portfolio-link">
                             <div class="portfolio-image">
                                 <img src="rxcover-01.webp" alt="醫療健康APP｜UI UX Design">
@@ -1048,7 +1061,6 @@
                         </a>
                     </div>
 
-                    <!-- 8. ECO Heaven -->
                     <div class="portfolio-item scroll-animate" data-category="branding">
                         <a href="ecoheaven.html" class="portfolio-link">
                             <div class="portfolio-image">
@@ -1058,7 +1070,6 @@
                         </a>
                     </div>
                     
-                    <!-- 11. 元春中藥 -->
                     <div class="portfolio-item scroll-animate" data-category="branding">
                         <a href="元春中藥.html" class="portfolio-link">
                             <div class="portfolio-image">
@@ -1068,7 +1079,6 @@
                         </a>
                     </div>
                     
-                    <!-- 12. 日月老茶廠 -->
                     <div class="portfolio-item scroll-animate" data-category="branding">
                         <a href="index9.html" class="portfolio-link">
                             <div class="portfolio-image">
@@ -1078,7 +1088,6 @@
                         </a> 
                     </div>
                     
-                     <!-- 10. Facebook Advertisement-4 -->
                      <div class="portfolio-item scroll-animate" data-category="self-promotion">
                         <a href="index6.html" class="portfolio-link">
                             <div class="portfolio-image">
@@ -1088,7 +1097,6 @@
                         </a>
                     </div>
 
-                    <!-- 13. 插畫 -->
                     <div class="portfolio-item scroll-animate" data-category="illustration">
                         <a href="index0illustration.html" class="portfolio-link">
                             <div class="portfolio-image">
@@ -1098,7 +1106,6 @@
                         </a>
                     </div>
 
-                     <!-- 14. Scrolling Infographic -->
                      <div class="portfolio-item scroll-animate" data-category="ad-edm">
                         <a href="eeeedm.html" class="portfolio-link">
                             <div class="portfolio-image">
@@ -1109,7 +1116,6 @@
                     </div>
 
 
-                    <!-- 15. Sketch -->
                     <div class="portfolio-item scroll-animate" data-category="illustration">
                         <a href="https://www.instagram.com/3oodpi/" class="portfolio-link">
                             <div class="portfolio-image">
@@ -1149,6 +1155,26 @@
             this.classList.toggle('active');
             document.querySelector('nav').classList.toggle('active');
         });
+
+        // 圖片漸顯偵測
+        function initImageFadeIn() {
+            const images = document.querySelectorAll('.portfolio-image img');
+            images.forEach(img => {
+                // 如果圖片已經在快取中下載好了
+                if (img.complete) {
+                    img.parentElement.classList.add('loaded');
+                }
+                // 監聽下載完成
+                img.addEventListener('load', () => {
+                    img.parentElement.classList.add('loaded');
+                });
+                // 處理錯誤，停止閃爍改為純底色
+                img.addEventListener('error', () => {
+                    img.parentElement.style.animation = 'none';
+                    img.parentElement.style.background = '#333';
+                });
+            });
+        }
 
         // Scrolling animation
         function isElementInViewport(el) {
@@ -1243,6 +1269,7 @@
         window.addEventListener('load', function() {
             handleScrollAnimation();
             initCategoryFilter();
+            initImageFadeIn(); // 初始化圖片閃爍與淡入機制
         });
         window.addEventListener('scroll', handleScrollAnimation);
         window.addEventListener('resize', handleScrollAnimation);
