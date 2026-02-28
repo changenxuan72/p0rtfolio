@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EX© DESIGN STUDIO | Portfolio</title>
+    <!-- 引用 Google Fonts: Inter，包含 400, 500, 600, 700, 800, 900 字重 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* 基礎樣式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* 全域邊距設定 - 增加電腦版左右邊距 */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding-left: 8%;
+            padding-right: 8%;
+        }
+
+        /* Header 樣式 */
+        header {
+            border-bottom: 0.75px solid #fff;
+            background-color: #000;
+            color: #fff;
+            padding: 1.3rem 0; /* 左右由容器控制 */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .logo-ex {
+            font-size: 2.7rem;
+            margin-right: 0.3rem;
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -2px;
+        }
+
+        .copyright-symbol {
+            font-size: 0.9rem;
+            vertical-align: super;
+            margin-top: -1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.1;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* 導覽選單 (電腦版) */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        nav a:hover { opacity: 0.6; }
+
+        /* 漢堡按鈕 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1002;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background-color: #fff;
+            transition: 0.3s;
+        }
+
+        /* 背景遮罩 (Overlay) */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease;
+            z-index: 998;
+        }
+
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 手機版選單 (抽屜式) */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 75%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: #000;
+            border-left: 0.75px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 100px 10% 2rem;
+            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 999;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        .mobile-nav li {
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav a {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        /* 主頁區 (Hero) */
+        .hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-bottom: 0.75px solid #fff;
+        }
+
+        .hero h1 {
+            font-size: clamp(3.5rem, 12vw, 9rem);
+            font-weight: 900;
+            line-height: 0.85;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            font-weight: 400;
+            max-width: 500px;
+            opacity: 0.7;
+            border-left: 2px solid #fff;
+            padding-left: 1.5rem;
+        }
+
+        /* 作品區 (Work Section) */
+        .work-section {
+            padding-top: 8rem;
+            padding-bottom: 4rem;
+            min-height: 800px;
+            border-bottom: 0.75px solid #fff;
+        }
+
+        .work-header {
+            display: flex;
+            justify-content: space-between; 
+            align-items: flex-end; 
+            margin-bottom: 5rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .work-title {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 0.9;
+        }
+
+        /* 分類按鈕 */
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+            justify-content: flex-end; 
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.2rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .filter-btn.active {
+            color: #fff;
+        }
+
+        .filter-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #fff;
+        }
+
+        /* 作品網格 - 預設電腦版 4 欄 */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 50px 30px;
+        }
+
+        .project-card {
+            position: relative;
+            cursor: pointer;
+            animation: fadeIn 0.6s ease forwards;
+            border-bottom: 0.75px solid rgba(255, 255, 255, 0.5); 
+            padding-bottom: 30px;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 縮圖容器：嚴格執行正方形比例且尺寸統一 */
+        .image-container {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background-color: #1a1a1a;
+            border-radius: 12px; 
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        /* 移除黑白效果 */
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover; /* 確保內容撐滿且不變形 */
+            filter: none; /* 移除 grayscale(100%) */
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project-card:hover .image-container img {
+            transform: scale(1.08);
+        }
+
+        .project-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .project-name {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .project-tag {
+            font-size: 0.75rem;
+            font-weight: 500;
+            opacity: 0.4;
+            text-transform: uppercase;
+        }
+
+        /* See More 按鈕 */
+        .see-more-container {
+            display: flex;
+            justify-content: center;
+            margin: 5rem 0 8rem;
+        }
+
+        .see-more-btn {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            padding: 1.2rem 4.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+        }
+
+        .see-more-btn:hover {
+            background-color: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* Let's Work Together 區塊 */
+        .cta-section {
+            padding: 12rem 8%;
+            border-bottom: 0.75px solid #fff;
+        }
+
+        .cta-content {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .cta-heading {
+            font-size: clamp(3rem, 11vw, 8.5rem);
+            font-weight: 800;
+            line-height: 0.85;
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+        }
+
+        .cta-heading span {
+            display: block;
+            color: #999; 
+            -webkit-text-stroke: 0;
+        }
+
+        .cta-link {
+            font-size: clamp(1.2rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: opacity 0.3s ease;
+            border-bottom: 2px solid #fff;
+            width: fit-content;
+            padding-bottom: 5px;
+        }
+
+        .cta-link:hover {
+            opacity: 0.5;
+        }
+
+        /* Footer */
+        footer {
+            padding: 6rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* --- 響應式佈局調整 --- */
+
+        /* 平板佈局 (3 欄) */
+        @media (min-width: 801px) and (max-width: 1200px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .container {
+                padding-left: 6%;
+                padding-right: 6%;
+            }
+        }
+
+        /* 手機版佈局 (2 欄) */
+        @media (max-width: 800px) {
+            .container {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            .hero {
+                height: 60vh;
+                padding-top: 80px;
+            }
+
+            .work-section {
+                padding-top: 4rem;
+            }
+
+            .logo-ex { font-size: 2.1rem; }
+            .logo-text { font-size: 0.85rem; }
+            .hero p { font-size: 0.9rem; padding-left: 1rem; }
+            
+            nav ul { display: none; }
+            .menu-toggle { display: flex; }
+
+            .work-header { 
+                flex-direction: column; 
+                align-items: flex-start; 
+                gap: 1.5rem; 
+                margin-bottom: 3rem;
+            }
+            .work-title { font-size: 2.8rem; } 
+            
+            .filter-container { 
+                justify-content: flex-start; 
+                gap: 1rem; 
+            }
+            .filter-btn { font-size: 0.85rem; }
+
+            .portfolio-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 20px; 
+            }
+            
+            .project-card { padding-bottom: 20px; }
+            .project-name { font-size: 0.85rem; }
+            .project-tag { font-size: 0.65rem; }
+
+            .cta-section { padding: 8rem 5%; }
+            .cta-heading { font-size: 3.5rem; }
+
+            footer { 
+                flex-direction: column; 
+                gap: 2rem; 
+                text-align: center; 
+                font-size: 0.7rem; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <span class="logo-ex">EX</span>
+                    <span class="copyright-symbol">©</span>
+                    <div class="logo-text">
+                        <span>DESIGN</span>
+                        <span>STUDIO</span>
+                    </div>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#work">Work</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <button class="menu-toggle" id="menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 背景遮罩 -->
+    <div class="nav-overlay" id="nav-overlay"></div>
+
+    <!-- 手機版抽屜導覽 -->
+    <div class="mobile-nav" id="mobile-nav">
+        <ul>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- 主頁區 -->
+    <section class="hero container">
+        <h1>VISION<br>TO REALITY.</h1>
+        <p>Passionate designer delivering sincere, professional solutions for startups and established enterprises.</p>
+    </section>
+
+    <!-- 作品區 -->
+    <section class="work-section container" id="work">
+        <div class="work-header">
+            <h2 class="work-title">Work</h2>
+            <div class="filter-container" id="filter-bar">
+                <button class="filter-btn active" data-filter="All">All</button>
+                <button class="filter-btn" data-filter="Self-Promotion">Self-Promotion</button>
+                <button class="filter-btn" data-filter="Branding">Branding</button>
+                <button class="filter-btn" data-filter="UIUX">UIUX</button>
+                <button class="filter-btn" data-filter="AD&EDM">AD&EDM</button>
+                <button class="filter-btn" data-filter="Illustration">Illustration</button>
+            </div>
+        </div>
+        
+        <div class="portfolio-grid" id="grid">
+            <!-- 作品由 JS 填入 -->
+        </div>
+
+        <div class="see-more-container" id="see-more-container">
+            <button class="see-more-btn" id="see-more-btn">See More</button>
+        </div>
+    </section>
+
+    <!-- Let's Work Together 區塊 -->
+    <section class="cta-section container" id="contact">
+        <div class="cta-content">
+            <h2 class="cta-heading">
+                Let's work<br><span>together</span>
+            </h2>
+            <a href="mailto:hello@exdesign.studio" class="cta-link">hello@exdesign.studio</a>
+        </div>
+    </section>
+
+    <footer class="container">
+        <div>© 2025 EX DESIGN STUDIO. ALL RIGHTS RESERVED.</div>
+        <div id="about">Based in Taipei / Zurich / Tokyo</div>
+    </footer>
+
+    <script>
+        const projects = [
+            { title: "CreatorHub｜UI UX Design", img: "creator hub uiux-04.webp", cat: "UIUX", link: "creatorhub.html" },
+            { title: "智能辦公APP｜UI UX Design", img: "辦公app 識別系統-18.webp", cat: "UIUX", link: "officemate_new .html" },
+            { title: "Facebook Advertisement", img: "未命名-4_工作區域 1 複本 17.webp", cat: "Self-Promotion", link: "index7.html" },
+            { title: "enDoPure | VI Design", img: "pet_branding_new-04.webp", cat: "Branding", link: "pet_new.html" },
+            { title: "Facebook Advertisement", img: "adcover-01.webp", cat: "Self-Promotion", link: "new_ad_2026.html" },
+            { title: "圖文廣告｜AD&EDM", img: "more縮圖.webp", cat: "AD&EDM", link: "index0ad.html" },
+            { title: "Bio-Sync｜UIUX & Product", img: "小專專案整理-07.webp", cat: "UIUX", link: "小專.html" },
+            { title: "Facebook Advertisement", img: "webbb-12.webp", cat: "Self-Promotion", link: "index12345.html" },
+            { title: "醫療健康APP｜UI UX Design", img: "rxcover-01.webp", cat: "UIUX", link: "rxease_new.html" },
+            { title: "ECO Heaven | VI Design", img: "2025廣告.webp", cat: "Branding", link: "ecoheaven.html" },
+            { title: "元春中藥房｜識別設計", img: "元春中藥 品牌識別-16.webp", cat: "Branding", link: "元春中藥.html" },
+            { title: "日月老茶廠｜識別設計", img: "webbb.webp", cat: "Branding", link: "index9.html" },
+            { title: "Facebook Advertisement", img: "webbb-07.webp", cat: "Self-Promotion", link: "index6.html" },
+            { title: "插畫 | Illustration", img: "more縮圖.webp", cat: "Illustration", link: "index0illustration.html" },
+            { title: "長圖｜Scrolling Infographic", img: "more縮圖.webp", cat: "AD&EDM", link: "eeeedm.html" },
+            { title: "有的沒的 | Sketch", img: "eq7nz-0vh8j.gif", cat: "Illustration", link: "https://www.instagram.com/3oodpi/" }
+        ];
+
+        let currentFilter = 'All';
+        let isExpanded = false;
+
+        const grid = document.getElementById('grid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const seeMoreBtn = document.getElementById('see-more-btn');
+        const seeMoreContainer = document.getElementById('see-more-container');
+
+        // 動態判斷當前初始顯示數量
+        function getLimit() {
+            if (window.innerWidth <= 800) return 6; // 手機版
+            if (window.innerWidth <= 1200) return 6; // 平板版 改為 6 個 (兩排 3 欄)
+            return 8; // 電腦版
+        }
+
+        function renderProjects() {
+            grid.innerHTML = '';
+            const filtered = currentFilter === 'All' ? projects : projects.filter(p => p.cat === currentFilter);
+            const initialLimit = getLimit();
+            const toDisplay = isExpanded ? filtered : filtered.slice(0, initialLimit);
+
+            toDisplay.forEach((p, index) => {
+                const card = document.createElement('a');
+                card.href = p.link;
+                card.className = 'project-card';
+                card.style.animationDelay = `${(index % initialLimit) * 0.05}s`;
+                card.innerHTML = `
+                    <div class="image-container">
+                        <img src="${p.img}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/800x800/1a1a1a/ffffff?text=Image+Not+Found'">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-name">${p.title}</span>
+                        <span class="project-tag">${p.cat}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            if (filtered.length <= initialLimit) {
+                seeMoreContainer.style.display = 'none';
+            } else {
+                seeMoreContainer.style.display = 'flex';
+                seeMoreBtn.textContent = isExpanded ? 'Show Less' : 'See More';
+            }
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.getAttribute('data-filter');
+                isExpanded = false;
+                renderProjects();
+            });
+        });
+
+        seeMoreBtn.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            renderProjects();
+            if (!isExpanded) {
+                document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+        const navOverlay = document.getElementById('nav-overlay');
+        
+        function toggleMenu() {
+            mobileNav.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            
+            const spans = menuToggle.querySelectorAll('span');
+            if(mobileNav.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
+                document.body.style.overflow = 'hidden';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+                document.body.style.overflow = '';
+            }
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        navOverlay.addEventListener('click', toggleMenu);
+
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(renderProjects, 250);
+        });
+
+        renderProjects();
+    </script>
+</body>
+</html>
