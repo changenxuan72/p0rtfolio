@@ -422,7 +422,7 @@
                 margin-bottom: 3rem;
                 font-size: 1.2rem;
                 padding: 2%;
-                width: 25%;
+                width: 22.5%;
             }
             .hero {
                 padding: 260px 0 180px;
@@ -518,11 +518,16 @@
                 font-size: 3.8rem;
                 margin-bottom: 1.6rem;
             }
+            
+            /* --- 電腦版作品集 Grid 修改：改為四個一排 --- */
             .portfolio-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
+                gap: 40px 2.5%; /* 稍微縮小間隙以適配四列 */
             }
+            
+            /* --- 電腦版說明文字修改：稍微改小一點 --- */
             .portfolio-caption {
-                font-size: 1.1rem;
+                font-size: 0.9rem; /* 原版 1.1rem */
                 margin-top: 15px;
             }
             
@@ -1000,8 +1005,8 @@
                     </a>
                 </div>
 
-                <!-- Facebook Advertisement -->   
-                    <div class="portfolio-item scroll-animate" data-category="self-promotion">
+                <!-- Facebook Advertisemen -->
+                <div class="portfolio-item scroll-animate" data-category="self-promotion">
                         <a href="index7.html" class="portfolio-link">
                             <div class="portfolio-image">
                                 <img src="未命名-4_工作區域 1 複本 17.webp" alt="Facebook Advertisement-3"> 
@@ -1010,18 +1015,18 @@
                         </a>
                     </div>
 
-                <!-- EnDoPure -->  
-                    <div class="portfolio-item scroll-animate" data-category="branding">
+                <!-- enDoPure -->
+                <div class="portfolio-item scroll-animate" data-category="branding">
                         <a href="pet_new.html" class="portfolio-link">
                             <div class="portfolio-image">
                                 <img src="pet_branding_new-04.webp" alt="EnDoPure | VI Design">
                             </div>
-                            <p class="portfolio-caption">EnDoPure | VI Design</p>
+                            <p class="portfolio-caption">enDoPure | VI Design</p>
                         </a>
                     </div>
 
-                <!-- Facebook Advertisement -->
-                     <div class="portfolio-item scroll-animate" data-category="self-promotion">
+                <!-- new_ad_2026 -->
+                <div class="portfolio-item scroll-animate" data-category="self-promotion">
                         <a href="new_ad_2026.html" class="portfolio-link">
                             <div class="portfolio-image">
                                 <img src="adcover-01.webp" alt="Facebook Advertisement">
@@ -1030,9 +1035,8 @@
                         </a>
                     </div>
                 
-
-                <!-- AD&EDM -->    
-                    <div class="portfolio-item scroll-animate" data-category="ad-edm">
+                <!-- AD&EDM -->
+                <div class="portfolio-item scroll-animate" data-category="ad-edm">
                         <a href="index0ad.html" class="portfolio-link">
                             <div class="portfolio-image">
                                 <img src="more縮圖.webp" alt="圖文廣告｜AD&EDM">
@@ -1041,11 +1045,8 @@
                         </a>
                     </div>
 
-                 <!-- See More 後的項目 -->
-
-
-                    <!-- 小專 -->  
-                    <div class="portfolio-item scroll-animate" data-category="uiux branding">
+                <!-- AD&EDM -->
+                 <div class="portfolio-item scroll-animate" data-category="uiux branding">
                         <a href="小專.html" class="portfolio-link">
                             <div class="portfolio-image">
                                 <img src="小專專案整理-07.webp" alt="Bio-Sync｜UIUX Design">
@@ -1063,7 +1064,7 @@
                             <p class="portfolio-caption">Facebook Advertisement</p>
                         </a>
                     </div>
-                    
+
                     <!-- 醫療健康APP -->
                     <div class="portfolio-item scroll-animate" data-category="uiux branding">
                         <a href="rxease_new.html" class="portfolio-link">
@@ -1084,7 +1085,7 @@
                         </a>
                     </div>
 
-                    <!-- 元春中藥 -->
+                    <!-- 元春中藥房 -->
                     <div class="portfolio-item scroll-animate" data-category="branding">
                         <a href="元春中藥.html" class="portfolio-link">
                             <div class="portfolio-image">
@@ -1105,7 +1106,7 @@
                     </div>
 
                     <!-- Facebook Advertisement -->
-                     <div class="portfolio-item scroll-animate" data-category="self-promotion">
+                    <div class="portfolio-item scroll-animate" data-category="self-promotion">
                         <a href="index6.html" class="portfolio-link">
                             <div class="portfolio-image">
                                 <img src="webbb-07.webp" alt="Facebook Advertisement-4"> 
@@ -1113,8 +1114,7 @@
                             <p class="portfolio-caption">Facebook Advertisement</p>
                         </a>
                     </div>
-                    
-                    <!-- 插畫 -->
+                    <!-- 插畫 -->                  
                     <div class="portfolio-item scroll-animate" data-category="illustration">
                         <a href="index0illustration.html" class="portfolio-link">
                             <div class="portfolio-image">
@@ -1125,7 +1125,7 @@
                     </div>
 
                     <!-- 長圖 -->
-                     <div class="portfolio-item scroll-animate" data-category="ad-edm">
+                    <div class="portfolio-item scroll-animate" data-category="ad-edm">
                         <a href="eeeedm.html" class="portfolio-link">
                             <div class="portfolio-image">
                                 <img src="more縮圖.webp" alt="長圖｜Scrolling Infographic">
@@ -1133,7 +1133,6 @@
                             <p class="portfolio-caption">長圖｜Scrolling Infographic</p>
                         </a>
                     </div>
-
                     <!-- Sketch -->
                     <div class="portfolio-item scroll-animate" data-category="illustration">
                         <a href="https://www.instagram.com/3oodpi/" class="portfolio-link">
@@ -1239,9 +1238,13 @@
                     }
                 });
 
-                // Show first 6 items, hide the rest
+                // --- 動態判斷初始顯示數量 ---
+                // 手機版 (< 768) 顯示 6 個，電腦版 (>= 768) 顯示 8 個
+                const threshold = window.innerWidth >= 768 ? 8 : 6;
+
+                // 根據數量顯示或隱藏作品
                 visibleItems.forEach((item, index) => {
-                    if (index < 6 || showingMore) {
+                    if (index < threshold || showingMore) {
                         item.style.display = 'flex';
                     } else {
                         item.style.display = 'none';
@@ -1249,13 +1252,13 @@
                     }
                 });
 
-                // Show/hide "See More" button
-                if (visibleItems.length > 6 && !showingMore) {
+                // 顯示/隱藏 "See More" 按鈕
+                if (visibleItems.length > threshold && !showingMore) {
                     seeMoreContainer.classList.add('show');
                     portfolioGrid.classList.remove('expanded');
                 } else {
                     seeMoreContainer.classList.remove('show');
-                    if (showingMore && visibleItems.length > 6) {
+                    if (showingMore && visibleItems.length > threshold) {
                         portfolioGrid.classList.add('expanded');
                     } else {
                         portfolioGrid.classList.remove('expanded');
@@ -1265,11 +1268,8 @@
 
             categoryButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    // Remove active class from all buttons
                     categoryButtons.forEach(btn => btn.classList.remove('active'));
-                    // Add active class to clicked button
                     this.classList.add('active');
-
                     currentCategory = this.getAttribute('data-category');
                     showingMore = false;
                     updateDisplay();
@@ -1281,14 +1281,15 @@
                 updateDisplay();
             });
 
-            // Initial display
+            // 初始化與視窗縮放時更新顯示
             updateDisplay();
+            window.addEventListener('resize', updateDisplay);
         }
 
         window.addEventListener('load', function() {
             handleScrollAnimation();
             initCategoryFilter();
-            initImageFadeIn(); // 初始化圖片閃爍與淡入機制
+            initImageFadeIn(); 
         });
         window.addEventListener('scroll', handleScrollAnimation);
         window.addEventListener('resize', handleScrollAnimation);
