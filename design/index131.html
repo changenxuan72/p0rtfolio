@@ -227,8 +227,8 @@
         }
 
         .work-title {
-            font-size: clamp(3rem, 8vw, 5.5rem);
-            font-weight: 800;
+            font-size: clamp(3rem, 8vw, 4.5rem);
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: -0.02em;
             line-height: 0.9;
@@ -297,7 +297,7 @@
             width: 100%;
             aspect-ratio: 1 / 1;
             background-color: #1a1a1a;
-            border-radius: 12px; 
+            border-radius: 10px; 
             overflow: hidden;
             margin-bottom: 1.5rem;
         }
@@ -420,7 +420,7 @@
         /* --- 響應式佈局調整 --- */
 
         /* 平板佈局 (3 欄) */
-        @media (min-width: 801px) and (max-width: 1200px) {
+        @media (min-width: 701px) and (max-width: 1200px) {
             .portfolio-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -431,7 +431,7 @@
         }
 
         /* 手機版佈局 (2 欄) */
-        @media (max-width: 800px) {
+        @media (max-width: 700px) {
             .container {
                 padding-left: 5%;
                 padding-right: 5%;
@@ -443,11 +443,12 @@
             }
 
             .work-section {
-                padding-top: 4rem;
+                padding-top: 3rem;
+                padding-bottom: 0.5rem;
             }
 
-            .logo-ex { font-size: 2.1rem; }
-            .logo-text { font-size: 0.85rem; }
+            .logo-ex { font-size: 2.3rem; }
+            .logo-text { font-size: 0.9rem; }
             .hero p { font-size: 0.9rem; padding-left: 1rem; }
             
             nav ul { display: none; }
@@ -459,7 +460,7 @@
                 gap: 1.5rem; 
                 margin-bottom: 3rem;
             }
-            .work-title { font-size: 2.8rem; } 
+            .work-title { font-size: 2.5rem; } 
             
             .filter-container { 
                 justify-content: flex-start; 
@@ -472,8 +473,12 @@
                 gap: 20px; 
             }
             
+            .image-container {
+                border-radius: 8px; 
+            }
+
             .project-card { padding-bottom: 20px; }
-            .project-name { font-size: 0.85rem; }
+            .project-name { font-size: 0.65rem; }
             .project-tag { font-size: 0.65rem; }
 
             .cta-section { padding: 8rem 5%; }
@@ -485,7 +490,9 @@
                 text-align: center; 
                 font-size: 0.7rem; 
             }
+            
         }
+
     </style>
 </head>
 <body>
@@ -575,22 +582,22 @@
 
     <script>
         const projects = [
-            { title: "CreatorHub｜UI UX Design", img: "creator hub uiux-04.webp", cat: "UIUX", link: "creatorhub.html" },
-            { title: "智能辦公APP｜UI UX Design", img: "辦公app 識別系統-18.webp", cat: "UIUX", link: "officemate_new .html" },
+            { title: "商務媒合app <br> CreatorHub", img: "creator hub uiux-04.webp", cat: "UIUX", link: "creatorhub.html" },
+            { title: "智能辦公APP <br> office mate", img: "辦公app 識別系統-18.webp", cat: "UIUX", link: "officemate_new .html" },
             { title: "Facebook Advertisement", img: "未命名-4_工作區域 1 複本 17.webp", cat: "Self-Promotion", link: "index7.html" },
-            { title: "enDoPure | VI Design", img: "pet_branding_new-04.webp", cat: "Branding", link: "pet_new.html" },
+            { title: "enDoPure <br> VI Design", img: "pet_branding_new-04.webp", cat: "Branding", link: "pet_new.html" },
             { title: "Facebook Advertisement", img: "adcover-01.webp", cat: "Self-Promotion", link: "new_ad_2026.html" },
-            { title: "圖文廣告｜AD&EDM", img: "more縮圖.webp", cat: "AD&EDM", link: "index0ad.html" },
-            { title: "Bio-Sync｜UIUX & Product", img: "小專專案整理-07.webp", cat: "UIUX", link: "小專.html" },
+            { title: "圖文廣告 <br> AD&EDM", img: "more縮圖.webp", cat: "AD&EDM", link: "index0ad.html" },
+            { title: "Bio-Sync <br> UIUX & Product", img: "小專專案整理-07.webp", cat: "UIUX", link: "小專.html" },
             { title: "Facebook Advertisement", img: "webbb-12.webp", cat: "Self-Promotion", link: "index12345.html" },
-            { title: "醫療健康APP｜UI UX Design", img: "rxcover-01.webp", cat: "UIUX", link: "rxease_new.html" },
-            { title: "ECO Heaven | VI Design", img: "2025廣告.webp", cat: "Branding", link: "ecoheaven.html" },
-            { title: "元春中藥房｜識別設計", img: "元春中藥 品牌識別-16.webp", cat: "Branding", link: "元春中藥.html" },
-            { title: "日月老茶廠｜識別設計", img: "webbb.webp", cat: "Branding", link: "index9.html" },
+            { title: "醫療健康APP <br> rxease", img: "rxcover-01.webp", cat: "UIUX", link: "rxease_new.html" },
+            { title: "ECO Heaven  <br>  VI Design", img: "2025廣告.webp", cat: "Branding", link: "ecoheaven.html" },
+            { title: "元春中藥房 <br> 識別設計", img: "元春中藥 品牌識別-16.webp", cat: "Branding", link: "元春中藥.html" },
+            { title: "日月老茶廠 <br> 識別設計", img: "webbb.webp", cat: "Branding", link: "index9.html" },
             { title: "Facebook Advertisement", img: "webbb-07.webp", cat: "Self-Promotion", link: "index6.html" },
-            { title: "插畫 | Illustration", img: "more縮圖.webp", cat: "Illustration", link: "index0illustration.html" },
-            { title: "長圖｜Scrolling Infographic", img: "more縮圖.webp", cat: "AD&EDM", link: "eeeedm.html" },
-            { title: "有的沒的 | Sketch", img: "eq7nz-0vh8j.gif", cat: "Illustration", link: "https://www.instagram.com/3oodpi/" }
+            { title: "插畫 <br> Illustration", img: "more縮圖.webp", cat: "Illustration", link: "index0illustration.html" },
+            { title: "長圖 <br> Scrolling Infographic", img: "more縮圖.webp", cat: "AD&EDM", link: "eeeedm.html" },
+            { title: "有的沒的 <br> Sketch", img: "eq7nz-0vh8j.gif", cat: "Illustration", link: "https://www.instagram.com/3oodpi/" }
         ];
 
         let currentFilter = 'All';
