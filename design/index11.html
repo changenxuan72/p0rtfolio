@@ -220,7 +220,7 @@
             position: relative;
             /* 新增以下三行：增加底線設定 */
             border-bottom: 0.5px solid #595959; /* 設定細底線顏色，#333 是深灰色 */
-            padding-bottom: 5px; /* 底線與文字之間的間距 */
+            padding-bottom: 25px; /* 底線與文字之間的間距 */
             margin-bottom: 10px; /* 每一列作品之間的間距 */
 
         }
@@ -265,6 +265,7 @@
         /* --- 修改區：作品資訊文字排版 --- */
         .portfolio-caption {
             font-size: 0.65rem; /* 手機版 0.65 */
+            font-weight: 500;
             margin-top: 10px;
             text-align: left;
             color: #fff;
@@ -273,8 +274,8 @@
             justify-content: space-between;
             align-items: flex-start;
             text-transform: uppercase;
-            margin-top: 10px;
-            margin-bottom: 5px; /* 縮小文字下方的留白，讓它靠近底線 */
+            margin-top: 12px;
+            margin-bottom: 8px; /* 縮小文字下方的留白，讓它靠近底線 */
         }
         .caption-title {
             text-align: left;
@@ -552,6 +553,7 @@
             .portfolio-caption {
                 font-size: 0.85rem; /* 電腦版改為 0.85rem */
                 margin-top: 15px;
+                padding-top: 18px;
             }
             
             .contact {
@@ -854,9 +856,15 @@
                 font-weight: 800;
                 margin-bottom: 0.8rem;
             }
+
+            .portfolio-item {
+                padding-bottom: 10px; /* 底線與文字之間的間距 */
+                margin-bottom: 7px; /* 每一列作品之間的間距 */
+            }
             /* 移除原本的 margin-bottom 以適配左右佈局 */
             .portfolio-caption {
-                margin-bottom: 12px;
+                padding-top: 12px;
+                margin-bottom: 8px;
             }
             .portfolio-image {
                 border-radius: 7px; 
@@ -1111,7 +1119,7 @@
                                 <img src="rxcover-01.webp" alt="醫療健康APP｜UI UX Design">
                             </div>
                             <p class="portfolio-caption">
-                                <span class="caption-title">醫療健康APP<br>UI UX Design</span>
+                                <span class="caption-title">醫療健康APP<br>rxease</span>
                                 <span class="caption-category">UIUX</span>
                             </p>
                         </a>
