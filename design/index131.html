@@ -183,7 +183,7 @@
             padding-left: 1.5rem;
         }
 
-        /* --- 作品區 (針對閃爍進行修正) --- */
+        /* --- 作品區 (核心修正優化) --- */
         .work-section {
             padding-top: 8rem;
             padding-bottom: 4rem;
@@ -227,38 +227,43 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr); 
             gap: 50px 30px;
+            /* 修正：優化滾動性能 */
+            will-change: transform;
         }
 
         .project-card {
             position: relative;
             cursor: pointer;
-            /* 修正：移除了 fadeIn 動畫中的 translateY 以防止跳動 */
             border-bottom: 0.75px solid rgba(255, 255, 255, 0.5); 
             padding-bottom: 30px;
             text-decoration: none;
             color: inherit;
             display: block;
-            transition: opacity 0.4s ease; /* 改用簡單的透明度切換 */
+            /* 修正：移除 opacity transition 防止滑動時出現半透明閃爍 */
         }
 
         /* --- 骨架屏載入動畫與圖片修正 --- */
         .image-container {
             width: 100%;
             aspect-ratio: 1 / 1;
-            background: #1a1a1a;
-            /* 你要求的骨架屏動效 */
+            height: auto;
+            min-height: 200px; /* 防止高度塌陷 */
+            background: #111;
             background-image: linear-gradient(
                 90deg, 
-                #1a1a1a 25%, 
-                #333333 50%, 
-                #1a1a1a 75%
+                #111111 25%, 
+                #222222 50%, 
+                #111111 75%
             );
             background-size: 200% 100%;
-            animation: loading-shimmer 1.5s infinite linear;
+            animation: loading-shimmer 1.8s infinite linear;
             border-radius: 10px; 
             overflow: hidden;
             margin-bottom: 1.5rem;
             position: relative;
+            /* 修正：硬體加速 */
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
 
         @keyframes loading-shimmer {
@@ -271,8 +276,9 @@
             height: 100%;
             display: block;
             object-fit: cover;
-            opacity: 0; /* 修正：圖片載入前透明，防止問號出現 */
-            transition: opacity 0.5s ease-in-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0; /* 圖片載入前透明 */
+            transition: opacity 0.4s ease-out, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
         }
 
         /* 圖片載入完成後的狀態 */
@@ -280,14 +286,14 @@
             opacity: 1;
         }
 
-        /* 圖片載入後停止骨架屏動畫節省效能 */
+        /* 圖片載入後完全停止背景動畫，防止背景顏色與圖片邊緣閃爍 */
         .image-container.is-loaded {
             animation: none;
-            background: #1a1a1a;
+            background: transparent;
         }
 
         .project-card:hover .image-container img.loaded {
-            transform: scale(1.08);
+            transform: scale(1.05);
         }
 
         .project-info {
@@ -340,7 +346,7 @@
             .filter-container { justify-content: flex-start; gap: 0.5rem; }
             .filter-btn { font-size: 0.9rem; }
             .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 15px 4.5%; }
-            .image-container { border-radius: 8px; }
+            .image-container { border-radius: 8px; min-height: 150px; }
             .project-card { padding-bottom: 20px; }
             .project-name { font-size: 0.65rem; }
             .project-tag { font-size: 0.65rem; }
@@ -424,6 +430,7 @@
     </footer>
 
     <script>
+        // --- 專案資料庫 (完整保留) ---
         const projects = [
             { title: "商務媒合app <br> CreatorHub", img: "creator hub uiux-04.webp", cat: "UIUX", link: "creatorhub.html" },
             { title: "智能辦公APP <br> office mate", img: "辦公app 識別系統-18.webp", cat: "UIUX", link: "officemate_new .html" },
@@ -451,16 +458,20 @@
         const seeMoreBtn = document.getElementById('see-more-btn');
         const seeMoreContainer = document.getElementById('see-more-container');
 
+        // 響應式限制邏輯 (保留)
         function getLimit() {
             if (window.innerWidth <= 800) return 6;
             if (window.innerWidth <= 1200) return 6;
             return 8;
         }
 
-        // 核心修正：圖片載入處理
+        // 圖片載入完成邏輯 (修正閃爍關鍵)
         function handleImgLoad(img) {
-            img.classList.add('loaded'); // 讓圖片淡入
-            img.parentElement.classList.add('is-loaded'); // 停止骨架動畫
+            img.classList.add('loaded');
+            // 使用 setTimeout 確保動畫切換更平滑
+            setTimeout(() => {
+                img.parentElement.classList.add('is-loaded');
+            }, 100);
         }
 
         function renderProjects() {
@@ -473,13 +484,11 @@
                 const card = document.createElement('a');
                 card.href = p.link;
                 card.className = 'project-card';
-                // 保留你原本的 staggered fadeIn 延遲逻辑，但已移除了 translateY
-                card.style.animationDelay = `${(index % initialLimit) * 0.05}s`;
                 card.innerHTML = `
                     <div class="image-container">
                         <img src="${p.img}" alt="${p.title}" 
                              onload="handleImgLoad(this)"
-                             onerror="this.src='https://via.placeholder.com/800x800/1a1a1a/ffffff?text=Image+Not+Found'; handleImgLoad(this)">
+                             onerror="this.src='https://via.placeholder.com/800x800/111/ffffff?text=Image+Error'; handleImgLoad(this)">
                     </div>
                     <div class="project-info">
                         <span class="project-name">${p.title}</span>
@@ -497,7 +506,7 @@
             }
         }
 
-        // --- 以下所有交互邏輯完全保留原始狀態 ---
+        // --- 交互邏輯 (完全保留) ---
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
@@ -543,6 +552,7 @@
             resizeTimer = setTimeout(renderProjects, 250);
         });
 
+        // 初始渲染
         renderProjects();
     </script>
 </body>
