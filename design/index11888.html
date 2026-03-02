@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex.site</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'DM Sans', Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 0px;
+        }
+        header {
+            background-color: transparent;;
+            color: #fff;
+            padding: 1.3rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            mix-blend-mode: difference;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .logo-ex {
+            font-size: 2.7rem;
+            margin-right: 0.5rem;
+            line-height: 1;
+        }
+        .logo-text {
+            font-size: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.1;
+            padding-left: 5%;
+        }
+        .logo-text2 {
+            font-size: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: top;
+            line-height: 1.1;
+            margin-left: -5%;
+        }
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.7rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            transition: transform 0.3s ease;
+        }
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            margin: 6px 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .nav-toggle.active {
+            transform: rotate(90deg);
+        }
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 30px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+    /* --- 僅修改 Hero 視覺 --- */
+        .hero {
+                padding: 180px 0% 100px; /* 增加頂部間距 */
+                background-color: #000;  /* 背景改為黑色 */
+                min-height: 80vh;
+                display: flex;
+                align-items: center;
+                border-bottom: 0.75px solid #999; /* 符合截圖的深色底線 */
+            }
+
+            .hero h1 {
+                font-size: clamp(3.5rem, 12vw, 9rem); /* 讓字級隨螢幕縮放 */
+                font-weight: 700;
+                line-height: 0.9;
+                color: #fff;
+                text-transform: uppercase;
+                margin-bottom: 2.5rem;
+                letter-spacing: -2px;
+            }
+
+            .hero .divider {
+                width: 100%;
+                max-width: 1200px;
+                height: 1px;
+                background-color: #444;
+                margin-bottom: 2.5rem;
+            }
+
+            .hero .hero-description {
+                color: #888;
+                font-size: 1.1rem;
+                max-width: 500px;
+                line-height: 1.5;
+                margin-bottom: 3.5rem;
+            }
+
+            .hero .location-tag {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                /* 新增以下這行，讓內部的標籤與文字靠右對齊 */
+                align-items: flex-end;
+            }
+
+            .hero .location-label {
+                font-size: 0.7rem;
+                letter-spacing: 2px;
+                color: #555;
+                text-transform: uppercase;
+                background: #1a1a1a;
+                padding: 2px 6px;
+                width: fit-content;
+            }
+
+            .hero .location-name {
+                color: #777;
+                font-size: 1rem;
+            }
+
+            .hero .scroll-down-arrow {
+                margin-top: 3rem;
+                color: #fff;
+                font-size: 1.5rem;
+            }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn {
+            text-align: center; 
+            display: inline-block;
+            background-color: #000;
+            color: #fff;
+            font-size: 1.2rem;
+            padding: 15px;
+            text-decoration: none;
+            border-radius: 9px; 
+            margin-top: 1rem;
+            width: 35%;
+        }
+        .portfolio {
+            background-color: #000;
+            padding: 5% 2.5% 5%;
+            z-index: 1;
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 50px 2.5%; /* 上下 ，左右  */
+        }
+        /* 增加展開後的下方空間 */
+        .portfolio-grid.expanded {
+            margin-bottom: 15%;
+        }
+        .portfolio h2 {
+            padding: 0% 0.5% ;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            margin-top: 3rem;
+            font-weight: 900;
+            text-align: left;
+            color: #fff;
+        }
+        .portfolio-item {
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            /* 新增以下三行：增加底線設定 */
+            border-bottom: 0.5px solid #808080; /* 設定細底線顏色，#333 是深灰色 */
+            padding-bottom: 25px; /* 底線與文字之間的間距 */
+            margin-bottom: 10px; /* 每一列作品之間的間距 */
+
+        }
+        
+        /* --- 圖片閃爍載入優化 --- */
+        .portfolio-image {
+            aspect-ratio: 1 / 1;
+            border-radius: 3.5%; 
+            overflow: hidden;
+            background: #222; /* 預設深色底適配黑色背景 */
+            background-image: linear-gradient(
+                90deg, 
+                #1a1a1a 25%, 
+                #333333 50%, 
+                #1a1a1a 75%
+            );
+            background-size: 200% 100%;
+            animation: loading-shimmer 1.5s infinite;
+        }
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0; /* 圖片載入前完全透明，防止問號出現 */
+            transition: opacity 0.5s ease-in-out, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* 強化放大動畫 */
+        }
+
+        /* --- 修改區：新增點擊/懸停時在遮罩內放大的效果 --- */
+        .portfolio-item:hover .portfolio-image img,
+        .portfolio-item:active .portfolio-image img {
+            transform: scale(1.07); /* 放大 7% */
+        }
+        /* ------------------------------------------- */
+
+        /* 當 JS 偵測載入完成後 */
+        .portfolio-image.loaded {
+            animation: none;
+            background: transparent;
+        }
+        .portfolio-image.loaded img {
+            opacity: 1;
+        }
+        @keyframes loading-shimmer {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
+        /* ---------------------- */
+
+        /* --- 修改區：作品資訊文字排版 --- */
+        .portfolio-caption {
+            font-size: 0.65rem; /* 手機版 0.65 */
+            font-weight: 500;
+            margin-top: 10px;
+            text-align: left;
+            color: #fff;
+            letter-spacing: 0.3px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            text-transform: uppercase;
+            margin-top: 12px;
+            margin-bottom: 8px; /* 縮小文字下方的留白，讓它靠近底線 */
+        }
+        .caption-title {
+            text-align: left;
+            flex: 1;
+        }
+        .caption-category {
+            text-align: right;
+            color: #808080;
+            margin-left: 10px;
+        }
+        /* ---------------------- */
+
+        .portfolio-link {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease, filter 0.3s ease;
+        }
+        .portfolio-link:hover {
+            color: #595959;
+        }
+        .portfolio-link:active {
+            filter: blur(3px);
+        }
+        .see-more {
+            text-align: left;
+            margin-top: 2rem;
+            display: none;
+        }
+        .see-more.show {
+            display: block;
+        }
+        .see-more .btn {
+            text-align: center; 
+            background-color: #fff;
+            color: #000;
+            border: 0.75px solid #000;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+            cursor: pointer;
+        }
+        .contact {
+            padding: 13% 0% 7%;
+            background-color: #ededed;
+            position: relative;
+            overflow: hidden;
+            border-top: 0.75px solid #fff;
+        }
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            right: -45%;
+            bottom: 0%;
+            background-image: url('webbb-16.webp');
+            background-size: cover;
+            background-position: right;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        .contact h1{
+            color: #fff;
+            font-size: 6rem;
+            font-weight: 700;
+        }
+        .contact p{
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            line-height: 2;
+            color: #999;
+        }
+        .contact .btn {
+            text-align: center; 
+            background-color: #fff;
+            color: #000;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+            cursor: pointer;
+        }
+        footer {
+            color: #fff;
+            background-color: #000;
+            text-align: center;
+            padding: 70px 0;
+            border-top: 0.75px solid #fff;
+            border-bottom: 0.75px solid #000;
+            z-index: 2;
+        }
+        
+        /* Category buttons styles */
+        .portfolio-header {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 2rem;
+        }
+        
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px 12px; /* 上下，左右 */
+            margin-top: 0px; /* 從10px改為0px，往上移10px */
+        }
+        
+        .category-btn {
+            background: none;
+            border: none;
+            color: #808080;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+            font-family: 'DM Sans', Arial, sans-serif;
+        }
+        
+        .category-btn:hover,
+        .category-btn.active {
+            color: #fff;
+        }
+        
+        .category-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: #fff;
+        }
+
+        /* 手機版專用樣式 - 隱藏在電腦版 */
+        .mobile-only {
+            display: none;
+        }
+        
+        /*電腦*/
+        @media (min-width: 768px) {
+            .container {
+                width: 80%;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 0px;
+            }
+            header {
+                padding: 2rem 0;
+                font-size: 1.1rem;
+                font-weight: 500;
+            }
+            .logo-ex {
+                font-size: 3.2rem;
+            }
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            .logo-text2 {
+                font-size: 1.3rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: top;
+                line-height: 1.1;
+                padding-left: -5%;
+            }
+            .btn {
+                font-size: 1.5rem;
+            }
+            .see-more .btn {
+                margin-top: 2.5rem;
+                margin-bottom: 3rem;
+                font-size: 1.2rem;
+                padding: 2%;
+                width: 22.5%;
+            }
+            
+            .btn2 {
+                text-align: center; 
+                display: inline-block;
+                background-color: #d9d9d9;
+                color: #000;
+                font-size: 1.5rem;
+                padding: 19px;
+                text-decoration: none;
+                border-radius: 9px; 
+                margin-left: 10px;
+                width: auto;
+                margin-bottom: 1.5rem;
+                flex: 1;
+            }
+            .portfolio {
+                background-color: #000;
+                padding: 5% 0% 5%;
+                z-index: 1;
+            }
+            .portfolio h2 {
+                padding: 0% 1% 0%;
+                font-size: 3.8rem;
+                margin-bottom: 1.6rem;
+            }
+            
+            /* --- 電腦版作品集 Grid 修改：改為四個一排 --- */
+            .portfolio-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 40px 2.5%; /* 稍微縮小間隙以適配四列 */
+            }
+            
+            /* --- 修改區：電腦版說明文字大小 --- */
+            .portfolio-caption {
+                font-size: 0.85rem; /* 電腦版改為 0.85rem */
+                margin-top: 15px;
+                padding-top: 18px;
+            }
+            
+            .contact {
+                padding: 13% 2.5% 7%;
+                background-color: #1a1a1a;
+                border-top: 0px solid #999;
+                position: relative;
+                overflow: hidden;
+            }
+            .contact::before {
+                content: '';
+                position: absolute;
+                top: 0%;
+                left: 0%;
+                right: -35%;
+                bottom: 0%;
+                background-image: url('webbb-18.png');
+                background-size: cover;
+                background-position: right;
+                background-repeat: no-repeat;
+                opacity: 0;
+                z-index: 0;
+            }
+            .contact h1{
+                font-weight: 700;
+                color: #fff;
+                text-transform: uppercase;
+            }
+            .contact .btn {
+                width: 25%;
+                padding-top: 23px;
+                padding-bottom: 23px;
+            }
+            .p2 {
+                color: #4d4d4d;
+                font-size: 1rem;
+                line-height: 1.7;
+                margin-bottom: 2rem;
+                text-align: left;
+            }
+            footer {
+                color: #fff;
+                background-color: #000;
+                text-align: center;
+                padding: 70px 0;
+                border-top: 0.75px solid #999;
+                border-bottom: 1px solid #000;
+                z-index: 2;
+                font-size: 1rem;
+                line-height: 2;
+            }
+            .p3 {
+                font-size: 1.5rem;
+                color: #fff;
+            }
+            
+            /* Desktop category buttons */
+            .portfolio-header {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center; /* 從flex-start改為center */
+                margin-bottom: 2rem;
+            }
+            
+            .category-buttons {
+                margin-top: 0;
+                gap: 20px;
+                padding-top: 10px; /* 添加上邊距，微調位置 */
+            }
+            
+            .category-btn {
+                font-size: 1.2rem;
+            }
+            
+            .category-btn.active::after {
+                height: 5px;
+            }
+
+            /* 電腦版隱藏手機版專用內容 */
+            .mobile-only {
+                display: none !important;
+            }
+        }
+        /*手機*/
+        @media (max-width: 767px) {
+            .nav-toggle {
+                display: block;
+            }
+            nav {
+                display: none;
+            }
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #000;
+                padding-bottom: 5%;
+                padding-right: 0; 
+            }
+            nav.active ul {
+                flex-direction: column;
+                align-items: flex-end; /* 控制 Flex 子元素靠右 */
+                padding-right: 7%;
+            }
+            nav.active ul li {
+                margin: 0px 0;
+                width: 100%; /* 讓 li 撐滿寬度 */
+                text-align: right; /* 文字強制靠右 */
+            }
+            nav.active ul li a {
+                font-size: 1rem;
+            }
+
+            .hero .hero-description {
+                color: #888;
+                font-size: 0.9rem;
+                max-width: 500px;
+                line-height: 1.5;
+                margin-bottom: 3.5rem;
+            }
+
+            .hero {
+                padding: 180px 5% 20px; /* 增加頂部間距 */
+                background-color: #000;  /* 背景改為黑色 */
+                min-height: 80vh;
+                display: flex;
+                align-items: center;
+                border-bottom: 0.75px solid #fff; /* 符合截圖的深色底線 */
+            }
+
+            .see-more {
+                text-align: left;
+            }
+            .see-more .btn {
+                text-align: center; 
+                background-color: #fff;
+                font-size: 0.9rem;
+                color: #000;
+                margin-top: 1rem;
+                margin-bottom: 3rem;
+                cursor: pointer;
+            }
+            .btn {
+                text-align: center; 
+                display: inline-block;
+                background-color: #000;
+                color: #fff;
+                padding: 15px;
+                text-decoration: none;
+                border-radius: 7px; 
+                margin-top: 1rem;
+                width: 35%;
+            }
+            
+            
+            /* 手機版顯示專用內容 */
+            .mobile-only {
+                display: block;
+            }
+            
+            .portfolio {
+                background-color: #000;
+                padding: 1% 2.5% 7%;
+                z-index: 1;
+            }
+            .portfolio-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px 4%;
+            }
+            .portfolio h2 {
+                padding: 1% 1% 0%;
+                font-size: 2rem;
+                font-weight: 800;
+                margin-bottom: 0.8rem;
+            }
+
+            .portfolio-item {
+                padding-bottom: 10px; /* 底線與文字之間的間距 */
+                margin-bottom: 7px; /* 每一列作品之間的間距 */
+            }
+            /* 移除原本的 margin-bottom 以適配左右佈局 */
+            .portfolio-caption {
+                padding-top: 12px;
+                margin-bottom: 8px;
+            }
+            .portfolio-image {
+                border-radius: 8px; 
+            }
+
+            .contact {
+                padding: 35% 3.5% 23%;
+                background-color: #000;
+            }
+            .contact h1{
+                font-size: 2.4rem;
+                letter-spacing: -0.5px; 
+                color: #fff;
+            }
+            .contact p{
+                margin-top: 1rem;
+                font-size: 0.8rem;
+                padding-left: 1%;
+                letter-spacing: 0.25px; 
+                color: #e5e5e5;
+            }
+            .contact .btn {
+                width: 45%;
+                font-size: 1rem;
+                padding-top: 17px;
+                padding-bottom: 17px;
+                background-color: #fff;
+                color: #000;
+            }
+            .btn2 {
+                display: none;
+            }
+            .p2 {
+                display: none;
+            }
+            footer {
+                color: #fff;
+                background-color: #000;
+                text-align: left;
+                padding: 30px 3.5% 35px;
+                border-top: 0.75px solid #fff;
+                border-bottom: 1px solid #000;
+                z-index: 2;
+                font-size: 0.8rem;
+                line-height: 2;
+            }
+            .p3 {
+                font-size: 1rem;
+                color: #fff;
+            }
+            .p4 {
+                font-size: 0.6rem;
+                letter-spacing: 0.25px; 
+                color: #e5e5e5;
+            }
+            .p5 {
+                font-size: 0.8rem;
+                color: #fff;   
+            }
+
+        }
+        
+        /* New styles for scrolling animation */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-animate.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <span class="logo-ex">EX</span> 
+                <div class="logo-text2">
+                    <span>&copy;</span></br>
+                </div>
+                <div class="logo-text">
+                    <span>DESIGN</span>
+                    <span>STUDIO</span>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="index0moreinfo.html">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <main>
+            <section class="hero">
+                <div class="container">
+                    <h1 class="scroll-animate">DESIGN<br>THAT DELIVERS</h1>
+                    <div class="divider scroll-animate"></div>
+                    <p class="hero-description scroll-animate">
+                        Crafting intentional visual experiences. Ready to collaborate on your next big idea.
+                    </p>
+                    <div class="location-tag scroll-animate">
+                        <span class="location-label">BASED IN</span>
+                        <span class="location-name">Taipei & Taoyuan</span>
+                    </div>
+                    <div class="scroll-down-arrow scroll-animate">↓</div>
+                </div>
+            </section>
+
+        <section id="work" class="portfolio">
+            <div class="container">
+                <div class="portfolio-header">
+                    <h2 class="scroll-animate">WORK</h2>
+                    <div class="category-buttons scroll-animate">
+                        <button class="category-btn active" data-category="all">All</button>
+                        <button class="category-btn" data-category="self-promotion">Self-Promotion</button>
+                        <button class="category-btn" data-category="branding">Branding</button>
+                        <button class="category-btn" data-category="uiux">UIUX</button>
+                        <button class="category-btn" data-category="ad-edm">AD&EDM</button>
+                        <button class="category-btn" data-category="illustration">Illustration</button>
+                    </div>
+                </div>
+
+                <div class="portfolio-grid">
+                    <div class="portfolio-item scroll-animate" data-category="uiux branding">
+                        <a href="creatorhub.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="creator hub uiux-04.webp" alt="CreatorHub｜UI UX Design">
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">商務媒合APP<br>CREATORHUB</span>
+                                <span class="caption-category">UIUX</span>
+                            </p>
+                        </a>
+                    </div>
+                
+                    <div class="portfolio-item scroll-animate" data-category="uiux branding">
+                        <a href="officemate_new .html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="辦公app 識別系統-18.webp" alt="智能辦公APP｜UI UX Design">
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">智能辦公APP<br>OFFICE MATE</span>
+                                <span class="caption-category">UIUX</span>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="portfolio-item scroll-animate" data-category="self-promotion">
+                        <a href="index7.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="未命名-4_工作區域 1 複本 17.webp" alt="Facebook Advertisement"> 
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">FACEBOOK<br>ADVERTISEMENT</span>
+                                <span class="caption-category">SELF-PROMOTION</span>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="portfolio-item scroll-animate" data-category="branding">
+                        <a href="pet_new.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="pet_branding_new-04.webp" alt="EnDoPure | VI Design">
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">ENDOPURE<br>VI DESIGN</span>
+                                <span class="caption-category">BRANDING</span>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="portfolio-item scroll-animate" data-category="self-promotion">
+                        <a href="new_ad_2026.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="adcover-01.webp" alt="Facebook Advertisement">
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">Facebook<br>Advertisement</span>
+                                <span class="caption-category">SELF-PROMOTION</span>
+                            </p>
+                        </a>
+                    </div>
+                
+                    <div class="portfolio-item scroll-animate" data-category="ad-edm">
+                        <a href="index0ad.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="more縮圖.webp" alt="圖文廣告｜AD&EDM">
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">廣告<br>AD&EDM</span>
+                                <span class="caption-category">AD&EDM</span>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="portfolio-item scroll-animate" data-category="uiux branding">
+                        <a href="小專.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="小專專案整理-07.webp" alt="Bio-Sync｜UIUX Design">
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">Bio-Sync<br>UIUX & Product</span>
+                                <span class="caption-category">UIUX</span>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="portfolio-item scroll-animate" data-category="self-promotion">
+                        <a href="index12345.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="webbb-12.webp" alt="Facebook Advertisement">
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">Facebook<br>Advertisement</span>
+                                <span class="caption-category">SELF-PROMOTION</span>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="portfolio-item scroll-animate" data-category="uiux branding">
+                        <a href="rxease_new.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="rxcover-01.webp" alt="醫療健康APP｜UI UX Design">
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">醫療健康APP<br>rxease</span>
+                                <span class="caption-category">UIUX</span>
+                            </p>
+                        </a>
+                    </div>
+                    
+                    <div class="portfolio-item scroll-animate" data-category="branding">
+                        <a href="ecoheaven.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="2025廣告.webp" alt="ECO Heaven | VI Design">
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">ECO Heaven<br>VI Design</span>
+                                <span class="caption-category">BRANDING</span>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="portfolio-item scroll-animate" data-category="branding">
+                        <a href="元春中藥.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="元春中藥 品牌識別-16.webp" alt="元春中藥房｜識別設計">
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">元春中藥房<br>識別設計</span>
+                                <span class="caption-category">BRANDING</span>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="portfolio-item scroll-animate" data-category="branding">
+                        <a href="index9.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="webbb.webp" alt="日月老茶廠｜識別設計">
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">日月老茶廠<br>識別設計</span>
+                                <span class="caption-category">BRANDING</span>
+                            </p>
+                        </a> 
+                    </div>
+
+                    <div class="portfolio-item scroll-animate" data-category="self-promotion">
+                        <a href="index6.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="webbb-07.webp" alt="Facebook Advertisement"> 
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">Facebook<br>Advertisement</span>
+                                <span class="caption-category">SELF-PROMOTION</span>
+                            </p>
+                        </a>
+                    </div>
+                                     
+                    <div class="portfolio-item scroll-animate" data-category="illustration">
+                        <a href="index0illustration.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="more縮圖.webp" alt="插畫 | Illustration"> 
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">插畫<br>Illustration</span>
+                                <span class="caption-category">ILLUSTRATION</span>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="portfolio-item scroll-animate" data-category="ad-edm">
+                        <a href="eeeedm.html" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="more縮圖.webp" alt="長圖｜Scrolling Infographic">
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">長圖<br>Scrolling Page</span>
+                                <span class="caption-category">AD&EDM</span>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="portfolio-item scroll-animate" data-category="illustration">
+                        <a href="https://www.instagram.com/3oodpi/" class="portfolio-link">
+                            <div class="portfolio-image">
+                                <img src="eq7nz-0vh8j.gif" alt="Sketch"> 
+                            </div>
+                            <p class="portfolio-caption">
+                                <span class="caption-title">有的沒的<br>Sketch</span>
+                                <span class="caption-category">ILLUSTRATION</span>
+                            </p>
+                        </a>
+                    </div>
+                </div>
+                <div class="see-more scroll-animate">
+                    <button class="btn see-more-btn">See More</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact">
+            <div class="container">
+                <h1 class="scroll-animate">Let's Work Together</h1>
+                <p class="chinese-text scroll-animate">相信有溫度的合作，能夠為您成就非凡的成果。</br>與我聯繫，讓我們攜手創造價值！</p>
+                <a href="mailto:zhangenxuan72@gmail.com" class="btn scroll-animate">Get in touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <p class="p3">Services</p>
+            <p class="p4">Graphic Design｜Logo Design｜Brand Design｜Social Media Advertising</p>
+            </br>
+            <p class="p5">&copy; 2024 Enxuan Zhang. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // 圖片漸顯偵測
+        function initImageFadeIn() {
+            const images = document.querySelectorAll('.portfolio-image img');
+            images.forEach(img => {
+                if (img.complete) {
+                    img.parentElement.classList.add('loaded');
+                }
+                img.addEventListener('load', () => {
+                    img.parentElement.classList.add('loaded');
+                });
+                img.addEventListener('error', () => {
+                    img.parentElement.style.animation = 'none';
+                    img.parentElement.style.background = '#333';
+                });
+            });
+        }
+
+        // Scrolling animation
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        function handleScrollAnimation() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            elements.forEach((el) => {
+                if (isElementInViewport(el)) {
+                    el.classList.add('active');
+                }
+            });
+        }
+
+        // Category filtering functionality
+        function initCategoryFilter() {
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            const seeMoreContainer = document.querySelector('.see-more');
+            const seeMoreBtn = document.querySelector('.see-more-btn');
+            const portfolioGrid = document.querySelector('.portfolio-grid');
+            
+            let currentCategory = 'all';
+            let showingMore = false;
+
+            function updateDisplay() {
+                let visibleItems = [];
+                portfolioItems.forEach(item => {
+                    const itemCategories = item.getAttribute('data-category').split(' ');
+                    if (currentCategory === 'all' || itemCategories.includes(currentCategory)) {
+                        visibleItems.push(item);
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                const threshold = window.innerWidth >= 768 ? 8 : 6;
+
+                visibleItems.forEach((item, index) => {
+                    if (index < threshold || showingMore) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                if (visibleItems.length > threshold && !showingMore) {
+                    seeMoreContainer.classList.add('show');
+                    portfolioGrid.classList.remove('expanded');
+                } else {
+                    seeMoreContainer.classList.remove('show');
+                    if (showingMore && visibleItems.length > threshold) {
+                        portfolioGrid.classList.add('expanded');
+                    } else {
+                        portfolioGrid.classList.remove('expanded');
+                    }
+                }
+            }
+
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.getAttribute('data-category');
+                    showingMore = false;
+                    updateDisplay();
+                });
+            });
+
+            seeMoreBtn.addEventListener('click', function() {
+                showingMore = true;
+                updateDisplay();
+            });
+
+            updateDisplay();
+            window.addEventListener('resize', updateDisplay);
+        }
+
+        window.addEventListener('load', function() {
+            handleScrollAnimation();
+            initCategoryFilter();
+            initImageFadeIn(); 
+        });
+        window.addEventListener('scroll', handleScrollAnimation);
+        window.addEventListener('resize', handleScrollAnimation);
+    </script>
+</body>
+</html>
