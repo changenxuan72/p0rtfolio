@@ -246,8 +246,16 @@
             object-fit: cover;
             display: block;
             opacity: 0; /* 圖片載入前完全透明，防止問號出現 */
-            transition: opacity 0.5s ease-in-out;
+            transition: opacity 0.5s ease-in-out, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* 強化放大動畫 */
         }
+
+        /* --- 修改區：新增點擊/懸停時在遮罩內放大的效果 --- */
+        .portfolio-item:hover .portfolio-image img,
+        .portfolio-item:active .portfolio-image img {
+            transform: scale(1.07); /* 放大 7% */
+        }
+        /* ------------------------------------------- */
+
         /* 當 JS 偵測載入完成後 */
         .portfolio-image.loaded {
             animation: none;
@@ -1083,7 +1091,7 @@
                                 <img src="more縮圖.webp" alt="圖文廣告｜AD&EDM">
                             </div>
                             <p class="portfolio-caption">
-                                <span class="caption-title">圖文廣告<br>AD&EDM</span>
+                                <span class="caption-title">廣告<br>AD&EDM</span>
                                 <span class="caption-category">AD&EDM</span>
                             </p>
                         </a>
