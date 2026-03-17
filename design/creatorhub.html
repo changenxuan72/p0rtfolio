@@ -84,6 +84,28 @@
             opacity: 1;
         }
 
+        .figma-btn {
+            text-align: center; /* 按鈕靠右對齊 */
+            margin: 20px;      /* 與周圍留出間距 */ 
+            font-family:'DM Sans';
+        }
+        .figma-btn a {
+            font-size: 1.3rem;          /* 字體大小 */
+            letter-spacing: -0.2px; 
+            text-decoration: none;    /* 去除底線 */
+            color: #5046e6;             /* 字體顏色 */
+            font-weight: 700;         /* 適度加粗 */
+            display: inline-flex;      /* 讓文字與箭頭在同一行 */
+            align-items: center;       /* 文字與箭頭垂直居中 */
+            gap: 8px;   
+            transition: transform 0.3s ease, color 0.3s ease; /* 添加平滑效果 */
+        }
+
+        .figma-btn a:hover {
+            transform: translateY(5px); /* 懸停時向右滑動 5px */
+            color: #dee6ff;             /* 懸停時文字變色 */
+        }
+
         .back-btn {
             text-align: right;
             margin: 20px;
@@ -113,6 +135,10 @@
             .title {
                 font-size: 3.2rem;
             }
+            .figma-btn a {
+            font-size: 2rem;          /* 字體大小 */
+            }
+
             .subtitle {
                 font-size: 1.7rem;
             }
@@ -145,6 +171,10 @@
         
         <div class="image-placeholder">
             <img src="creator hub uiux-02.webp" alt="CreatorHub UI 2" loading="lazy" onload="imgLoaded(this)">
+        </div>
+        
+        <div class="figma-btn">
+            <a href="https://www.figma.com/proto/jpw4UQ9bhSipTf7Bex2WDk/rxease?page-id=0%3A1&node-id=4-95&p=f&viewport=90%2C207%2C0.31&t=lHuJW9YztoAwReoo-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1%3A2">🔗 View Prototype</a>
         </div>
 
 
