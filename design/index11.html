@@ -213,24 +213,25 @@
             text-align: left;
             color: #fff;
         }
+        
+        /* --- 核心修正處：移除外層寬高比，防止重疊 --- */
         .portfolio-item {
-            aspect-ratio: 1 / 1;
+            /* aspect-ratio: 1 / 1;  <- 已刪除此行，避免容器高度鎖死造成文字重疊 */
             display: flex;
             flex-direction: column;
             position: relative;
-            /* 新增以下三行：增加底線設定 */
-            border-bottom: 0.5px solid #808080; /* 設定細底線顏色，#333 是深灰色 */
-            padding-bottom: 25px; /* 底線與文字之間的間距 */
-            margin-bottom: 10px; /* 每一列作品之間的間距 */
-
+            border-bottom: 0.5px solid #808080; 
+            padding-bottom: 25px; 
+            margin-bottom: 10px; 
         }
         
         /* --- 圖片閃爍載入優化 --- */
         .portfolio-image {
-            aspect-ratio: 1 / 1;
+            width: 100%;
+            aspect-ratio: 1 / 1; /* 將正方形鎖定在圖片層級 */
             border-radius: 3.5%; 
             overflow: hidden;
-            background: #222; /* 預設深色底適配黑色背景 */
+            background: #222; 
             background-image: linear-gradient(
                 90deg, 
                 #1a1a1a 25%, 
@@ -245,18 +246,15 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            opacity: 0; /* 圖片載入前完全透明，防止問號出現 */
-            transition: opacity 0.5s ease-in-out, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* 強化放大動畫 */
+            opacity: 0; 
+            transition: opacity 0.5s ease-in-out, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
         }
 
-        /* --- 修改區：新增點擊/懸停時在遮罩內放大的效果 --- */
         .portfolio-item:hover .portfolio-image img,
         .portfolio-item:active .portfolio-image img {
-            transform: scale(1.07); /* 放大 7% */
+            transform: scale(1.07); 
         }
-        /* ------------------------------------------- */
 
-        /* 當 JS 偵測載入完成後 */
         .portfolio-image.loaded {
             animation: none;
             background: transparent;
@@ -268,11 +266,9 @@
             0% { background-position: 100% 0; }
             100% { background-position: -100% 0; }
         }
-        /* ---------------------- */
 
-        /* --- 修改區：作品資訊文字排版 --- */
         .portfolio-caption {
-            font-size: 0.65rem; /* 手機版 0.65 */
+            font-size: 0.65rem; 
             font-weight: 500;
             margin-top: 10px;
             text-align: left;
@@ -283,7 +279,7 @@
             align-items: flex-start;
             text-transform: uppercase;
             margin-top: 12px;
-            margin-bottom: 8px; /* 縮小文字下方的留白，讓它靠近底線 */
+            margin-bottom: 8px; 
         }
         .caption-title {
             text-align: left;
@@ -294,7 +290,6 @@
             color: #808080;
             margin-left: 10px;
         }
-        /* ---------------------- */
 
         .portfolio-link {
             text-decoration: none;
@@ -373,7 +368,6 @@
             z-index: 2;
         }
         
-        /* Category buttons styles */
         .portfolio-header {
             display: flex;
             flex-direction: column;
@@ -383,8 +377,8 @@
         .category-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 7px 12px; /* 上下，左右 */
-            margin-top: 0px; /* 從10px改為0px，往上移10px */
+            gap: 7px 12px; 
+            margin-top: 0px; 
         }
         
         .category-btn {
@@ -414,12 +408,11 @@
             background-color: #fff;
         }
 
-        /* 手機版專用樣式 - 隱藏在電腦版 */
         .mobile-only {
             display: none;
         }
         
-        /*電腦*/
+        /* --- 電腦版修正區 --- */
         @media (min-width: 768px) {
             .container {
                 width: 80%;
@@ -430,7 +423,7 @@
             header {
                 padding: 2rem 0;
                 font-size: 1.3rem;
-                font-weight: 600;/*這裏*/
+                font-weight: 600;
             }
             .logo-ex {
                 font-size: 3.2rem;
@@ -481,17 +474,19 @@
             .hero p {
                 font-size: 1.1rem;
             }
+            
+            /* --- 修正處：移除不穩定的 About Grid 設定 --- */
             .about {
-                padding: 7% 12.5% 10% 12.5%;
+                padding: 7% 0 10%;
                 text-align: left;
-                display: grid;
+                display: block; /* 改回 block 以確保 container 的 Grid 正常作用 */
+            }
+            .about .container {
+                max-width: 1200px;
+                display: grid; /* 在 container 層級啟用 Grid，不使用 display: contents */
                 grid-template-columns: 2fr 3fr;
                 gap: 2rem;
                 align-items: start;
-            }
-            .about .container {
-                max-width: none;
-                display: contents;
             }
             .about h2 {
                 font-size: 4.2rem;
@@ -540,26 +535,16 @@
                 margin-bottom: 1.5rem;
                 flex: 1;
             }
-            .portfolio {
-                background-color: #000;
-                padding: 5% 2.5% 5%;
-                z-index: 1;
-            }
-            .portfolio h2 {
-                padding: 0% 1% 0%;
-                font-size: 3.8rem;
-                margin-bottom: 1.6rem;
-            }
             
-            /* --- 電腦版作品集 Grid 修改：改為四個一排 --- */
+            /* --- 修正處：明確指定四欄佈局，防止 Safari 計算錯誤 --- */
             .portfolio-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 40px 2.5%; /* 稍微縮小間隙以適配四列 */
+                display: grid;
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 40px 2.5%; 
             }
             
-            /* --- 修改區：電腦版說明文字大小 --- */
             .portfolio-caption {
-                font-size: 0.85rem; /* 電腦版改為 0.85rem */
+                font-size: 0.85rem; 
                 margin-top: 15px;
                 padding-top: 18px;
             }
@@ -569,20 +554,6 @@
                 background-color: #ededed;
                 position: relative;
                 overflow: hidden;
-            }
-            .contact::before {
-                content: '';
-                position: absolute;
-                top: 0%;
-                left: 0%;
-                right: -35%;
-                bottom: 0%;
-                background-image: url('webbb-18.png');
-                background-size: cover;
-                background-position: right;
-                background-repeat: no-repeat;
-                opacity: 0;
-                z-index: 0;
             }
             .contact h1{
                 font-size: 4.2rem;
@@ -616,19 +587,18 @@
                 color: #fff;
             }
             
-            /* Desktop category buttons */
             .portfolio-header {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-                align-items: center; /* 從flex-start改為center */
+                align-items: center; 
                 margin-bottom: 2rem;
             }
             
             .category-buttons {
                 margin-top: 0;
                 gap: 20px;
-                padding-top: 10px; /* 添加上邊距，微調位置 */
+                padding-top: 10px; 
             }
             
             .category-btn {
@@ -639,12 +609,12 @@
                 height: 5px;
             }
 
-            /* 電腦版隱藏手機版專用內容 */
             .mobile-only {
                 display: none !important;
             }
         }
-        /*手機*/
+        
+        /*手機版保留不變*/
         @media (max-width: 767px) {
             .nav-toggle {
                 display: block;
@@ -719,7 +689,6 @@
                 font-size: 0.8rem;
             }
             
-            /* 手機版 About 區塊樣式修改 */
             .about {
                 padding: 10% 5% 20%;
                 background-color: #fff;
@@ -732,9 +701,9 @@
                 position: relative;
                 z-index: 1;
                 max-width: 100%;
+                display: block; /* 確保手機版不啟用 Grid */
             }
             
-            /* 隱藏原有的電腦版內容在手機版 */
             .about h2:not(.mobile-only) {
                 display: none;
             }
@@ -759,7 +728,6 @@
                 display: none;
             }
             
-            /* 手機版專用樣式 */
             .about h2.mobile-only {
                 font-size: 3rem;
                 font-weight: 700;
@@ -843,7 +811,6 @@
                 background-position: center;
             }
 
-            /* 手機版顯示專用內容 */
             .mobile-only {
                 display: block;
             }
@@ -866,10 +833,9 @@
             }
 
             .portfolio-item {
-                padding-bottom: 10px; /* 底線與文字之間的間距 */
-                margin-bottom: 7px; /* 每一列作品之間的間距 */
+                padding-bottom: 10px; 
+                margin-bottom: 7px; 
             }
-            /* 移除原本的 margin-bottom 以適配左右佈局 */
             .portfolio-caption {
                 padding-top: 12px;
                 margin-bottom: 8px;
@@ -939,7 +905,6 @@
             line-height: 1.4;
         }
 
-        /* New styles for scrolling animation */
         .scroll-animate {
             opacity: 0;
             transform: translateY(20px);
@@ -1248,7 +1213,6 @@
             document.querySelector('nav').classList.toggle('active');
         });
 
-        // 圖片漸顯偵測
         function initImageFadeIn() {
             const images = document.querySelectorAll('.portfolio-image img');
             images.forEach(img => {
@@ -1265,7 +1229,6 @@
             });
         }
 
-        // Scrolling animation
         function isElementInViewport(el) {
             const rect = el.getBoundingClientRect();
             return (
@@ -1285,7 +1248,6 @@
             });
         }
 
-        // Category filtering functionality
         function initCategoryFilter() {
             const categoryButtons = document.querySelectorAll('.category-btn');
             const portfolioItems = document.querySelectorAll('.portfolio-item');
